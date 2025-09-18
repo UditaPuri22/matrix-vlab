@@ -1,372 +1,351 @@
 let nextIndex = 0;
 let elementList = [];
 let row, column;
+let matrix = []; // 2D representation for traversal & manipulation
 let matrixDiv, messageP, MatrixNextButton, MatrixResetButton, explanationP;
 
 // Predefined range for random matrix generation
 const MIN_VALUE = 1;
 const MAX_VALUE = 50;
 
+// Buttons & Inputs
 const manualBtn = document.getElementById("manualBtn");
 const randomBtn = document.getElementById("randomBtn");
 const elementsInput = document.getElementById("elementsInput");
+const rowInput = document.getElementById("row");
+const colInput = document.getElementById("column");
+const enterBtn = document.getElementById("enterBtn");
+const resetButton = document.getElementById("resetButton");
+const goToTraversalBtn = document.getElementById("goToTraversalBtn");
 
-manualBtn.addEventListener("click", () => {
-    elementsInput.style.display = "block"; // show input box
-});
-
-randomBtn.addEventListener("click", () => {
-    elementsInput.style.display = "none";   // hide manual input
-    generateRandomMatrix();                 //  immediately create a random matrix
-});
-
-function hideEnterButton() {
-  const btn = document.getElementById('enterBtn');
-  if (btn) btn.classList.add('hidden');
-}
-function showEnterButton() {
-  const btn = document.getElementById('enterBtn');
-  if (btn) btn.classList.remove('hidden');
-}
-
-
-randomBtn.addEventListener("click", () => {
-  elementsInput.style.display = "none";
-  hideEnterButton();
-  generateRandomMatrix();
-});
-
-
-// Display matrix based on user input
-function display() {
-    row = parseInt(document.getElementById("row").value);
-    column = parseInt(document.getElementById("column").value);
-    let values = document.getElementById("values").value;
-
-    const matrixContainer = document.getElementById("matrixContainer");
-    matrixContainer.innerHTML = ""; // clear previous content
-
-    if (isNaN(row) || isNaN(column) || values.trim() === "") {
-        matrixContainer.innerHTML = `
-            <div class="matrix-container">
-                <p class="message" style="color: red;">
-                    Please enter valid numbers and elements!
-                </p>
-            </div>`;
-        return;
-    }
-
-    let elementListRaw = values.split(",").map(num => num.trim());
-
-    if (elementListRaw.some(v => v === "" || isNaN(parseFloat(v)))) {
-        matrixContainer.innerHTML = `
-            <div class="matrix-container">
-                <p class="message" style="color: red;">
-                    Please enter only numbers separated by commas!
-                </p>
-            </div>`;
-        return;
-    }
-
-    elementList = elementListRaw.map(num => parseFloat(num));
-    nextIndex = 0;
-
-    const requiredElements = row * column;
-    if (elementList.length < requiredElements) {
-        matrixContainer.innerHTML = `
-            <div class="matrix-container">
-                <p class="message" style="color: red;">
-                    Insufficient elements! You entered ${elementList.length} but ${requiredElements} are required.
-                </p>
-            </div>`;
-        return;
-    } else if (elementList.length > requiredElements) {
-        matrixContainer.innerHTML = `
-            <div class="matrix-container">
-                <p class="message" style="color: red;">
-                    Too many elements! Only ${requiredElements} are required.
-                </p>
-            </div>`;
-        return;
-    }
-
-   
-    hideEnterButton();                      
-  document.getElementById("resetButton").classList.remove("hidden");
-
-    createMatrixGrid();
-}
-
-
-// Generate random matrix with predefined range
-function generateRandomMatrix() {
-    row = parseInt(document.getElementById("row").value);
-    column = parseInt(document.getElementById("column").value);
-
-    const matrixContainer = document.getElementById("matrixContainer");
-    matrixContainer.innerHTML = ""; // clear previous content
-
-    if (isNaN(row) || isNaN(column) || row <= 0 || column <= 0) {
-        matrixContainer.innerHTML = `
-            <div class="matrix-container">
-                <p class="message" style="color: red;">
-                    Please enter valid numbers for rows and columns!
-                </p>
-            </div>`;
-        return;
-    }
-
-    // Generate random integers (1–50)
-    elementList = [];
-    for (let i = 0; i < row * column; i++) {
-        elementList.push(Math.floor(Math.random() * 50) + 1); // 1 to 50 integers
-    }
-
-    nextIndex = 0;
-    createMatrixGrid(); // Display the matrix using existing function
-}
-
-
-// Common function to create grid and UI elements
-function createMatrixGrid() {
-    const matrixContainer = document.getElementById("matrixContainer");
-
-    matrixDiv = document.createElement("div");
-    matrixDiv.className = "matrix-container";
-
-    const grid = document.createElement("div");
-    grid.className = "matrix-grid";
-    grid.style.gridTemplateColumns = `repeat(${column}, 50px)`;
-
-    for (let i = 0; i < row * column; i++) {
-        const cell = document.createElement("div");
-        cell.className = "cell empty";
-        cell.textContent = "_";
-        grid.appendChild(cell);
-    }
-
-    matrixDiv.appendChild(grid);
-    matrixContainer.appendChild(matrixDiv);
-
-    messageP = document.createElement("p");
-    messageP.className = "message";
-    matrixDiv.appendChild(messageP);
-
-    explanationP = document.createElement("p");
-    explanationP.className = "explanation";
-    explanationP.textContent = "Step-by-step explanation will appear here.";
-    matrixDiv.appendChild(explanationP);
-
-    MatrixNextButton = document.createElement("button");
-    MatrixNextButton.textContent = "Next";
-    MatrixNextButton.onclick = () => insertNextValue(grid);
-    matrixDiv.appendChild(MatrixNextButton);
-
-    MatrixResetButton = document.getElementById("resetButton");
-    MatrixResetButton.classList.remove("hidden");
-
-    document.getElementById("goToTraversalBtn").classList.remove("hidden");
-}
-
-// Insert next value into the grid step-by-step
-function insertNextValue(grid) {
-    if (nextIndex < row * column) {
-        const insertedValue = elementList[nextIndex];
-        const cell = grid.children[nextIndex];
-        cell.textContent = insertedValue;
-        cell.classList.remove("empty");
-        cell.classList.add("filled");
-
-        explanationP.textContent = `Step ${nextIndex + 1}: Added ${insertedValue} at position (Row ${Math.floor(nextIndex / column) + 1}, Column ${nextIndex % column + 1})`;
-
-        nextIndex++;
-    }
-
-   if (nextIndex === row * column) {
-    explanationP.textContent = "Matrix is now completely filled!";
-    messageP.textContent = "All elements are filled!";
-    MatrixNextButton.style.display = "none";
-
-    // 🔹 Show global step button for next step
-    stepNextBtn.style.display = "block";
-    stepNextBtn.textContent = "Step 2 → Traversal";
-
-    // Reassign its click for traversal step
-    stepNextBtn.onclick = () => {
-        creationStep.style.display = "none";
-        traversalStep.style.display = "block";
-        stepNextBtn.style.display = "none"; // hidden until traversal finishes
-    };
-}
-
-
-}
-
-function resetMatrix() {
-  document.getElementById("row").value = "";
-  document.getElementById("column").value = "";
-  document.getElementById("values").value = "";
-  document.getElementById("matrixContainer").innerHTML = "";
-  document.getElementById("resetButton").classList.add("hidden");
-  elementsInput.style.display = "none";
-  nextIndex = 0;
-  elementList = [];
-
-  showEnterButton();                      // <- show ENTER again
-}
-
-
+// Steps
 let currentStep = 0;
-
 const stepExplanation = document.getElementById("stepExplanation");
 const stepNextBtn = document.getElementById("stepNextBtn");
 const creationStep = document.getElementById("creationStep");
 const matrixSteps = document.getElementById("matrixSteps");
-const traversalStep = document.getElementById("traversalStep");     // new step
-const manipulationStep = document.getElementById("manipulationStep"); // future step
+const traversalStep = document.getElementById("traversalStep");
+const manipulationStep = document.getElementById("manipulationStep");
 
-// initialize button label
+// Traversal elements
+const traversalMatrixContainer = document.getElementById("traversalMatrixContainer");
+const traversalExplanation = document.getElementById("traversalExplanation");
+const traversalNextBtn = document.getElementById("traversalNextBtn");
+const traverseRow = document.getElementById("traverseRow");
+const traverseCol = document.getElementById("traverseCol");
+const traverseBtn = document.getElementById("traverseBtn");
+const traversalResetBtn = document.getElementById("traversalResetBtn");
+
+
+// Manipulation elements
+const manipulationMatrixContainer = document.getElementById("manipulationMatrixContainer");
+const manipulationExplanation = document.getElementById("manipulationExplanation");
+const manipulationResetBtn = document.getElementById("manipulationResetBtn");
+const manipulateRow = document.getElementById("manipulateRow");
+const manipulateCol = document.getElementById("manipulateCol");
+const newValue = document.getElementById("newValue");
+const manipulateBtn = document.getElementById("manipulateBtn");
+
+// Helpers
+function hideEnterButton() {
+  enterBtn.classList.add('hidden');
+}
+function showEnterButton() {
+  enterBtn.classList.remove('hidden');
+}
+
+// Mode selection
+// Hide ENTER initially
+enterBtn.style.display = "none";
+
+manualBtn.addEventListener("click", () => {
+  elementsInput.style.display = "block";
+  enterBtn.style.display = "inline-block"; // show ENTER
+});
+
+randomBtn.addEventListener("click", () => {
+  elementsInput.style.display = "none";
+  enterBtn.style.display = "none"; // hide ENTER
+  generateRandomMatrix();
+});
+
+// Step Flow
 stepNextBtn.textContent = "Step 1 → Creation";
-
 stepNextBtn.addEventListener("click", () => {
   currentStep++;
 
   if (currentStep === 1) {
-    // Step 1: Move to Creation
+    // Step 1: Creation
     matrixSteps.style.display = "none";
     creationStep.style.display = "block";
     stepNextBtn.style.display = "none"; // hidden until creation finishes
-  } 
-  else if (currentStep === 2) {
+  } else if (currentStep === 2) {
     // Step 2: Traversal
     creationStep.style.display = "none";
     traversalStep.style.display = "block";
+    displayMatrix(matrix, traversalMatrixContainer);
     stepNextBtn.textContent = "Step 3 → Manipulation";
-  }
-  else if (currentStep === 3) {
+  } else if (currentStep === 3) {
     // Step 3: Manipulation
     traversalStep.style.display = "none";
     manipulationStep.style.display = "block";
-    stepNextBtn.style.display = "none"; // last step → hide
+    displayMatrix(matrix, manipulationMatrixContainer);
+    stepNextBtn.style.display = "none"; // hide at last step
   }
 });
 
+// Display matrix manually
+function display() {
+  row = parseInt(rowInput.value);
+  column = parseInt(colInput.value);
+  let values = document.getElementById("values").value;
 
+  const matrixContainer = document.getElementById("matrixContainer");
+  matrixContainer.innerHTML = "";
 
+  if (isNaN(row) || isNaN(column) || values.trim() === "") {
+    matrixContainer.innerHTML = `<p class="message" style="color: red;">Please enter valid numbers and elements!</p>`;
+    return;
+  }
 
-// STEP 2: MATRIX TRAVERSAL
+  let elementListRaw = values.split(",").map(num => num.trim());
+  if (elementListRaw.some(v => v === "" || isNaN(parseFloat(v)))) {
+    matrixContainer.innerHTML = `<p class="message" style="color: red;">Please enter only numbers separated by commas!</p>`;
+    return;
+  }
 
-let traversalMatrix = [];
-let traversalOrder = [];
-let traversalIndex = 0;
-let traversalMode = "";
-const traversalMatrixContainer = document.getElementById("traversalMatrixContainer");
-const traversalExplanation = document.getElementById("traversalExplanation");
-const traversalNextBtn = document.getElementById("traversalNextBtn");
-const traversalResetBtn = document.getElementById("traversalResetBtn");
+  elementList = elementListRaw.map(num => parseFloat(num));
+  nextIndex = 0;
 
-document.getElementById("rowWiseBtn").addEventListener("click", () => {
-  traversalMode = "row";
-  prepareTraversalMatrix();
-});
+  const requiredElements = row * column;
+  if (elementList.length !== requiredElements) {
+    matrixContainer.innerHTML = `<p class="message" style="color: red;">Need exactly ${requiredElements} elements!</p>`;
+    return;
+  }
 
-document.getElementById("colWiseBtn").addEventListener("click", () => {
-  traversalMode = "col";
-  prepareTraversalMatrix();
-});
+  hideEnterButton();
+  resetButton.classList.remove("hidden");
+  createMatrixGrid();
+}
 
-function prepareTraversalMatrix() {
-  traversalMatrixContainer.innerHTML = "";
-  traversalOrder = [];
-  traversalIndex = 0;
+// Random matrix
+function generateRandomMatrix() {
+  row = parseInt(rowInput.value);
+  column = parseInt(colInput.value);
 
-  // create grid again using elementList
+  const matrixContainer = document.getElementById("matrixContainer");
+  matrixContainer.innerHTML = "";
+
+  if (isNaN(row) || isNaN(column) || row <= 0 || column <= 0) {
+    matrixContainer.innerHTML = `<p class="message" style="color: red;">Enter valid rows & columns!</p>`;
+    return;
+  }
+
+  elementList = [];
+  for (let i = 0; i < row * column; i++) {
+    elementList.push(Math.floor(Math.random() * (MAX_VALUE - MIN_VALUE + 1)) + MIN_VALUE);
+  }
+
+  nextIndex = 0;
+  hideEnterButton();
+  createMatrixGrid();
+}
+
+// Create grid
+function createMatrixGrid() {
+  const matrixContainer = document.getElementById("matrixContainer");
+  matrixContainer.innerHTML = "";
+
+  matrixDiv = document.createElement("div");
+  matrixDiv.className = "matrix-container";
+
   const grid = document.createElement("div");
   grid.className = "matrix-grid";
   grid.style.gridTemplateColumns = `repeat(${column}, 50px)`;
 
-  traversalMatrix = []; // store 2D form for indexing
-  let idx = 0;
-  for (let i = 0; i < row; i++) {
-    const rowArr = [];
-    for (let j = 0; j < column; j++) {
-      const cell = document.createElement("div");
-      cell.className = "cell filled";
-      cell.textContent = elementList[idx];
-      grid.appendChild(cell);
-      rowArr.push(cell);
-
-      // add to traversal order
-      if (traversalMode === "row") {
-        traversalOrder.push({ i, j, value: elementList[idx] });
-      } else {
-        traversalOrder.push({ i: j, j: i, value: elementList[i * column + j] }); // col-wise
-      }
-
-      idx++;
-    }
-    traversalMatrix.push(rowArr);
+  for (let i = 0; i < row * column; i++) {
+    const cell = document.createElement("div");
+    cell.className = "cell empty";
+    cell.textContent = "_";
+    grid.appendChild(cell);
   }
 
-  traversalMatrixContainer.appendChild(grid);
+  matrixDiv.appendChild(grid);
+  matrixContainer.appendChild(matrixDiv);
 
-  traversalExplanation.textContent = `Traversal started in ${traversalMode === "row" ? "Row-wise" : "Column-wise"} mode.`;
+  messageP = document.createElement("p");
+  messageP.className = "message";
+  matrixDiv.appendChild(messageP);
+
+  explanationP = document.createElement("p");
+  explanationP.className = "explanation";
+  explanationP.textContent = "Step-by-step explanation will appear here.";
+  matrixDiv.appendChild(explanationP);
+
+  MatrixNextButton = document.createElement("button");
+  MatrixNextButton.textContent = "Next";
+  MatrixNextButton.onclick = () => insertNextValue(grid);
+  matrixDiv.appendChild(MatrixNextButton);
+
+  resetButton.classList.remove("hidden");
+  goToTraversalBtn.classList.remove("hidden");
+
+  // Reset 2D array
+  matrix = Array.from({ length: row }, () => Array(column).fill(null));
+}
+
+// Fill matrix one cell at a time
+function insertNextValue(grid) {
+  if (nextIndex < row * column) {
+    const insertedValue = elementList[nextIndex];
+    const cell = grid.children[nextIndex];
+    cell.textContent = insertedValue;
+    cell.classList.remove("empty");
+    cell.classList.add("filled");
+
+    const r = Math.floor(nextIndex / column);
+    const c = nextIndex % column;
+    matrix[r][c] = insertedValue;
+
+    explanationP.textContent = `Step ${nextIndex + 1}: Added ${insertedValue} at (Row ${r + 1}, Col ${c + 1})`;
+    nextIndex++;
+  }
+
+  if (nextIndex === row * column) {
+    explanationP.textContent = "Matrix is now completely filled!";
+    messageP.textContent = "All elements are filled!";
+    MatrixNextButton.style.display = "none";
+
+    // Show step progression
+    stepNextBtn.style.display = "block";
+    stepNextBtn.textContent = "Step 2 → Traversal";
+  }
+}
+
+// Reset
+function resetMatrix() {
+  rowInput.value = "";
+  colInput.value = "";
+  document.getElementById("values").value = "";
+  document.getElementById("matrixContainer").innerHTML = "";
+  resetButton.classList.add("hidden");
+  elementsInput.style.display = "none";
+  nextIndex = 0;
+  elementList = [];
+  matrix = [];
+  showEnterButton();
+}
+
+goToTraversalBtn.addEventListener("click", () => {
+  creationStep.style.display = "none";
+  traversalStep.style.display = "block";
+  displayMatrix(matrix, traversalMatrixContainer);
+  traversalExplanation.textContent = "Enter row and column to see the value.";
+});
+
+// Traversal
+traverseBtn.addEventListener("click", () => {
+  let r = parseInt(traverseRow.value);
+  let c = parseInt(traverseCol.value);
+  clearHighlights(traversalMatrixContainer);
+
+  if (isNaN(r) || isNaN(c) || r < 0 || r >= row || c < 0 || c >= column) {
+    traversalExplanation.textContent = "Invalid indices.";
+    return;
+  }
+
+  traversalExplanation.textContent = `Value at [${r}][${c}] is ${matrix[r][c]}.`;
+  highlightCell(traversalMatrixContainer, r, c);
+
+  // ✅ Show buttons only after a valid traversal
   traversalNextBtn.classList.remove("hidden");
   traversalResetBtn.classList.remove("hidden");
-}
-
-// handle NEXT button
-traversalNextBtn.addEventListener("click", () => {
-  if (traversalIndex < traversalOrder.length) {
-    const { i, j, value } = traversalOrder[traversalIndex];
-
-    let cell;
-    if (traversalMode === "row") {
-      cell = traversalMatrix[i][j];
-    } else {
-      cell = traversalMatrix[j][i]; // careful: reversed indices for col-wise
-    }
-
-    // highlight current cell
-    cell.style.backgroundColor = "#fbbf24"; // amber highlight
-    cell.style.color = "#000";
-
-    // explanation: human index (1-based) and code index (0-based)
-    traversalExplanation.textContent =
-      `Step ${traversalIndex + 1}: Visited value ${value} → Position (Row ${i + 1}, Col ${j + 1}) → Code index [${i}][${j}]`;
-
-    traversalIndex++;
-
-    if (traversalIndex === traversalOrder.length) {
-      traversalExplanation.textContent += " ✅ Traversal complete!";
-      traversalNextBtn.classList.add("hidden");
-    }
-  }
 });
 
-// Example: when traversal is complete
-function finishTraversal() {
-    explanationP.textContent = "Traversal complete!";
-    stepNextBtn.style.display = "block";
-    stepNextBtn.textContent = "Step 3 → Manipulation";
-
-    stepNextBtn.onclick = () => {
-        traversalStep.style.display = "none";
-        manipulationStep.style.display = "block";
-        stepNextBtn.style.display = "none"; // last step
-    };
-}
 
 
-// reset traversal step
 traversalResetBtn.addEventListener("click", () => {
-  traversalMatrixContainer.innerHTML = "";
-  traversalExplanation.textContent = "Select a traversal method to begin.";
-  traversalNextBtn.classList.add("hidden");
+  clearHighlights(traversalMatrixContainer);
+  traversalExplanation.textContent = "";
+  traverseRow.value = "";
+  traverseCol.value = "";
+
+  // ✅ Hide reset until another traversal happens
   traversalResetBtn.classList.add("hidden");
-  traversalOrder = [];
-  traversalIndex = 0;
-  traversalMode = "";
 });
 
 
+
+
+traversalNextBtn.addEventListener("click", () => {
+  traversalStep.style.display = "none";
+  manipulationStep.style.display = "block";
+  displayMatrix(matrix, manipulationMatrixContainer);
+});
+
+// Manipulation
+manipulateBtn.addEventListener("click", () => {
+  let r = parseInt(manipulateRow.value);
+  let c = parseInt(manipulateCol.value);
+  let val = parseInt(newValue.value);
+  clearHighlights(manipulationMatrixContainer);
+
+  if (isNaN(r) || isNaN(c) || isNaN(val) || r < 0 || r >= row || c < 0 || c >= column) {
+    manipulationExplanation.textContent = "Invalid input.";
+    return;
+  }
+
+  matrix[r][c] = val;
+  manipulationExplanation.textContent = `Matrix updated at [${r}][${c}].`;
+  displayMatrix(matrix, manipulationMatrixContainer);
+  highlightCell(manipulationMatrixContainer, r, c);
+});
+
+manipulationResetBtn.addEventListener("click", () => {
+  // Clear input fields
+  manipulateRow.value = "";
+  manipulateCol.value = "";
+  newValue.value = "";
+
+  // Clear highlights
+  clearHighlights(manipulationMatrixContainer);
+
+  // Reset explanation text
+  manipulationExplanation.textContent = "Enter index to update and new value:";
+
+  // Redisplay the current matrix without changes
+  displayMatrix(matrix, manipulationMatrixContainer);
+});
+
+// Helpers for traversal/manipulation
+function displayMatrix(matrixData, container) {
+  container.innerHTML = "";
+  container.style.gridTemplateColumns = `repeat(${column}, 50px)`;
+  container.className = "matrix-grid";
+
+  matrixData.forEach((rowArr, rIdx) => {
+    rowArr.forEach((val, cIdx) => {
+      let cell = document.createElement("div");
+      cell.className = "matrix-cell";
+      cell.textContent = val;
+      cell.dataset.row = rIdx;
+      cell.dataset.col = cIdx;
+      container.appendChild(cell);
+    });
+  });
+}
+
+function highlightCell(container, r, c) {
+  let cells = container.querySelectorAll(".matrix-cell");
+  cells.forEach(cell => {
+    if (parseInt(cell.dataset.row) === r && parseInt(cell.dataset.col) === c) {
+      cell.classList.add("highlight");
+    }
+  });
+}
+
+function clearHighlights(container) {
+  container.querySelectorAll(".matrix-cell").forEach(cell => {
+    cell.classList.remove("highlight");
+  });
+}

@@ -348,34 +348,48 @@ This virtual setup ensures accessible, self-paced learning, especially for those
     </div>
   </div>
 
-    <!-- Step 2: Matrix Traversal (hidden initially) -->
+   
+
+  <!-- Step 2: Matrix Traversal -->
   <div id="traversalStep" style="display:none;">
     <div class="title">Step 2: Traversing Matrix</div>
     <div class="content">
-      <p>
-        Traversal means visiting each element of the matrix in a systematic way.
-        You can traverse <b>row-wise</b> (left to right, row by row) or
-        <b>column-wise</b> (top to bottom, column by column).
-      </p>
+      <p>Enter index to traverse (row and column start from 0):</p>
+      <input type="number" id="traverseRow" placeholder="Row index"/>
+      <input type="number" id="traverseCol" placeholder="Column index"/>
+      <button id="traverseBtn">Traverse</button>
 
-      <!-- Traversal mode selector -->
-      <div class="switch-container">
-        <button type="button" id="rowWiseBtn">Row-wise</button>
-        <button type="button" id="colWiseBtn">Column-wise</button>
-      </div>
-
-      <!-- Matrix grid will be reused here -->
       <div id="traversalMatrixContainer"></div>
+      <div id="traversalExplanation" class="explanation"></div>
 
-      <!-- Explanation + step button -->
-      <div id="traversalExplanation" class="explanation">
-        Select a traversal method to begin.
-      </div>
       <div class="button-practice">
-        <button type="button" id="traversalNextBtn" class="hidden">NEXT</button>
-        <button type="button" id="traversalResetBtn" class="hidden">RESET</button>
+  <button id="traversalNextBtn" class="hidden">Go to Manipulation →</button>
+  <button id="traversalResetBtn" class="hidden">Reset</button>
+</div>
+
+
+
+    </div>
+  </div>    
+
+    <!-- Step 3: Matrix Manipulation -->
+  <div id="manipulationStep" style="display:none;">
+    <div class="title">Step 3: Manipulating Matrix</div>
+    <div class="content">
+      <p>Enter index to update and new value:</p>
+      <input type="number" id="manipulateRow" placeholder="Row index"/>
+      <input type="number" id="manipulateCol" placeholder="Column index"/>
+      <input type="number" id="newValue" placeholder="New value"/>
+      <button id="manipulateBtn">Update</button>
+
+      <div id="manipulationMatrixContainer"></div>
+      <div id="manipulationExplanation" class="explanation"></div>
+
+      <div class="button-practice">
+        <button id="manipulationResetBtn">Reset</button>
       </div>
     </div>
+  </div>
   </div>
 
 </div>
