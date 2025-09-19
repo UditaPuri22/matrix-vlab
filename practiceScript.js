@@ -258,6 +258,7 @@ traverseBtn.addEventListener("click", () => {
   highlightCell(traversalMatrixContainer, r, c);
 
   // ✅ Show buttons only after a valid traversal
+  traverseBtn.classList.add("hidden");
   traversalNextBtn.classList.remove("hidden");
   traversalResetBtn.classList.remove("hidden");
 });
@@ -271,6 +272,7 @@ traversalResetBtn.addEventListener("click", () => {
   traverseCol.value = "";
 
   // ✅ Hide reset until another traversal happens
+  traverseBtn.classList.remove("hidden");
   traversalResetBtn.classList.add("hidden");
 });
 
@@ -299,6 +301,9 @@ manipulateBtn.addEventListener("click", () => {
   manipulationExplanation.textContent = `Matrix updated at [${r}][${c}].`;
   displayMatrix(matrix, manipulationMatrixContainer);
   highlightCell(manipulationMatrixContainer, r, c);
+
+  manipulateBtn.classList.add("hidden");
+  manipulationResetBtn.classList.remove("hidden");
 });
 
 manipulationResetBtn.addEventListener("click", () => {
@@ -315,6 +320,8 @@ manipulationResetBtn.addEventListener("click", () => {
 
   // Redisplay the current matrix without changes
   displayMatrix(matrix, manipulationMatrixContainer);
+  manipulateBtn.classList.remove("hidden");
+   manipulationResetBtn.classList.add("hidden");
 });
 
 // Helpers for traversal/manipulation

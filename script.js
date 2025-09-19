@@ -95,27 +95,23 @@ const questions = [
     correctAnswers: [3],
   },
   {
-    question: " Q3) How do you access the element in the second row, third column of matrix?",
+    question: " Q3) How do you access the element in the second row, third column of matrix?(Note: Matrix indices starts from 0.",
     choices: ["  matrix[1][2]", " matrix[2][3]", "  matrix(1,2)", " matrix[2,3] "],
     correctAnswers: [0],
   },
+  
   {
-    question: " Q4) Which Python module is commonly used to generate random numbers for a matrix?",
-    choices: [" numpy", "random", " math", " os"],
-    correctAnswers: [1],
-  },
-  {
-    question: " Q5) What will this code output? matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]   print(matrix[0])",
+    question: " Q4) What will this code output? matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]   print(matrix[0])",
     choices: ["  [1, 2, 3]", "[4, 5, 6]", " [7, 8, 9]", " 1"],
     correctAnswers: [0],
   },
   {
-    question: " Q6) What is the output of this Python snippet?  matrix = [[0] * 3] * 3 ; matrix[0][0] = 1; print(matrix)",
+    question: " Q5) What is the output of this Python snippet?  matrix = [[0] * 3] * 3 ; matrix[0][0] = 1; print(matrix)",
     choices: [" [[1, 0, 0], [0, 0, 0], [0, 0, 0]]", " [[1, 0, 0], [1, 0, 0], [1, 0, 0]]", " [[1, 1, 1], [1, 1, 1], [1, 1, 1]]", " Error"],
     correctAnswers: [1],
   },
   {
-    question: " Q7) How do you find the number of rows in a 2D matrix matrix?",
+    question: " Q6) How do you find the number of rows in a 2D matrix matrix?",
     choices: [" len(matrix[0])","len(matrix)", " matrix.shape[0]", "  matrix.rows"],
     correctAnswers: [1],
   },
@@ -235,3 +231,15 @@ nextButton.addEventListener("click", checkAnswer);
 
 showQuestion();
 console.log("script loaded");
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.hljs && typeof hljs.highlightAll === "function") {
+    try {
+      hljs.highlightAll();
+    } catch (e) {
+      console.warn("hljs.highlightAll() failed:", e);
+    }
+  } else {
+    console.warn("highlight.js (hljs) not found on window.");
+  }
+});

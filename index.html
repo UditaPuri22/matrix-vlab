@@ -13,7 +13,6 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/harmonic16-dark.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-  
   <link rel="stylesheet" href="practiceStyles.css" />
 
 </head>
@@ -95,12 +94,15 @@
       <div class="container" id="aim">
         <div class="title">Aim</div>
         <div class="content">
-          <p> 
-This virtual lab on 2D Matrices in Python is designed for undergraduate students.
- It aims to simplify the understanding of two-dimensional arrays by combining theory, visual aids, and interactive coding tools. 
- The lab offers hands-on practice with matrix operations such as creation, traversal, and manipulation. 
- By providing quizzes and step-by-step visualizations, it helps learners strengthen both conceptual clarity and problem-solving skills. 
-This virtual setup ensures accessible, self-paced learning, especially for those without access to physical lab resources.</p>
+          <p>
+            This virtual lab on 2D Matrices in Python is designed for undergraduate students.
+            It aims to simplify the understanding of two-dimensional arrays by combining theory, visual aids, and
+            interactive coding tools.
+            The lab offers hands-on practice with matrix operations such as creation, traversal, and manipulation.
+            By providing quizzes and step-by-step visualizations, it helps learners strengthen both conceptual clarity
+            and problem-solving skills.
+            This virtual setup ensures accessible, self-paced learning, especially for those without access to physical
+            lab resources.</p>
         </div>
       </div>
 
@@ -109,9 +111,11 @@ This virtual setup ensures accessible, self-paced learning, especially for those
         <div class="title">Theory & Applications</div>
         <div class="content">
           <p>
-            A matrix is a structured rectangular array comprising numbers, symbols, or expressions organized into rows and columns.
-            Matrices are foundational in subjects like mathematics, computer science, engineering, physics, and data science.
-            A 2D matrix (two-dimensional matrix) is a grid of elements arranged in horizontal rows and vertical columns. 
+            A matrix is a structured rectangular array comprising numbers, symbols, or expressions organized into rows
+            and columns.
+            Matrices are foundational in subjects like mathematics, computer science, engineering, physics, and data
+            science.
+            A 2D matrix (two-dimensional matrix) is a grid of elements arranged in horizontal rows and vertical columns.
             Each element is identified by its position, given by a specific row and column index.
 
             For example:
@@ -128,42 +132,44 @@ This virtual setup ensures accessible, self-paced learning, especially for those
     padding: 10px;
     background-color: #f9f9f9;">
 
-          <b>A =&emsp;</b>[[1 2 3]
+            <b>A =&emsp;</b>[[1 2 3]
             <br>&emsp;&emsp;&emsp;[4 5 6]
             <br>&emsp;&emsp;&emsp;[7 8 9]]
 
           <ul>
             <li><b>Rows→ </b> Horizontal lines (e.g., [1, 2, 3] is the first row)</li>
-            <li><b>Columns →</b> Vertical lines (e.g., [1, 4, 7] is the first column)</li>    
-            <li><b>Elements:</b> Individual values in the matrix (e.g., 5 is located at row 2, column 2)</li> 
-            
+            <li><b>Columns →</b> Vertical lines (e.g., [1, 4, 7] is the first column)</li>
+            <li><b>Elements:</b> Individual values in the matrix (e.g., 5 is located at row 2, column 2)</li>
+
           </ul>
 
 
 
           <strong>Types of 2D Matrices</strong>
-          <br/><br/>
+          <br /><br />
           <ol>
-            <li><b>Square Matrix :</b> Same number of rows and columns (e.g., 3×3)</li> 
-            <li><b>Rectangular Matrix :</b> Different number of rows and columns (e.g., 2×4)</li> 
-            <li><b>Identity Matrix :</b> Diagonal elements are 1; all other elements are 0</li> 
-            <li><b>Zero Matrix :</b> All elements are 0</li> 
-            <li><b>Sparse Matrix :</b> Contains mostly zeroes</li> 
+            <li><b>Square Matrix :</b> Same number of rows and columns (e.g., 3×3)</li>
+            <li><b>Rectangular Matrix :</b> Different number of rows and columns (e.g., 2×4)</li>
+            <li><b>Identity Matrix :</b> Diagonal elements are 1; all other elements are 0</li>
+            <li><b>Zero Matrix :</b> All elements are 0</li>
+            <li><b>Sparse Matrix :</b> Contains mostly zeroes</li>
           </ol>
 
           <strong>Applications of Matrix Generation</strong>
-          <br/><br/>
+          <br /><br />
           <p>2D matrices play a crucial role across various domains:</p>
           <ol>
-            <li><b>Computer Graphics :</b> Used for image rendering, transformations, and geometric modeling.</li> 
-            <li><b>Scientific Computing :</b> Essential for solving complex simulations and mathematical computations in physics and engineering.</li> 
-            <li><b>Machine Learning & Data Science :</b> Represent datasets, perform matrix operations, and power neural networks.</li> 
-            <li><b>Cryptography :</b> Employed in encoding and decoding algorithms to secure information.</li> 
-            <li><b>Game Development :</b> Used in pathfinding, map grids, and collision detection.</li> 
-            <li><b>Network Theory :</b> Represent graphs and connections using adjacency matrices.</li> 
+            <li><b>Computer Graphics :</b> Used for image rendering, transformations, and geometric modeling.</li>
+            <li><b>Scientific Computing :</b> Essential for solving complex simulations and mathematical computations in
+              physics and engineering.</li>
+            <li><b>Machine Learning & Data Science :</b> Represent datasets, perform matrix operations, and power neural
+              networks.</li>
+            <li><b>Cryptography :</b> Employed in encoding and decoding algorithms to secure information.</li>
+            <li><b>Game Development :</b> Used in pathfinding, map grids, and collision detection.</li>
+            <li><b>Network Theory :</b> Represent graphs and connections using adjacency matrices.</li>
           </ol>
           <b>Objectives</b>
-          <br/><br/>
+          <br /><br />
           <ol>
             <li>Understand the concept of a 2D matrix </li>
             <li>Understanding its applications.</li>
@@ -179,57 +185,56 @@ This virtual setup ensures accessible, self-paced learning, especially for those
         </div>
       </div>
 
-      <!-- Procedure -->
       <div class="container" id="procedure">
         <div class="title">Procedure</div>
         <div class="content">
-          <p><strong>Define the Function:</strong></p>
+
+          <p><strong>Step 1 – Create the Matrix:</strong></p>
           <ul style="list-style-type:disc">
-            <li>Name the function matrix(m, n, elements), where:</li>
+            <li>Name the function <code>create_matrix(m, n)</code>, where:</li>
             <ul style="list-style-type:square">
               <li><code>m</code> is the number of rows</li>
               <li><code>n</code> is the number of columns</li>
-              <li><code>elements</code> is an array containing the values to fill the matrix</li>
             </ul>
+            <li>Ask the user to enter <code>m × n</code> values one by one</li>
+            <li>Return the created matrix</li>
+          </ul>
+
+          <p><strong>Step 2 – Traverse the Matrix:</strong></p>
+          <ul style="list-style-type:disc">
+            <li>Name the function <code>traverse_matrix(matrix, r, c)</code>, where:</li>
+            <ul style="list-style-type:square">
+              <li><code>matrix</code> is the matrix to traverse</li>
+              <li><code>r</code> is the row index</li>
+              <li><code>c</code> is the column index</li>
+            </ul>
+            <li>Check if the index is valid by comparing <code>r</code> and <code>c</code> with matrix dimensions</li>
+            <li>If valid, print the value at <code>matrix[r][c]</code></li>
+            <li>If invalid, print <code>"Invalid index!"</code></li>
+          </ul>
+
+          <p><strong>Step 3 – Manipulate the Matrix:</strong></p>
+          <ul style="list-style-type:disc">
+            <li>Name the function <code>manipulate_matrix(matrix, r, c, new_value)</code>, where:</li>
+            <ul style="list-style-type:square">
+              <li><code>matrix</code> is the matrix to manipulate</li>
+              <li><code>r</code> is the row index</li>
+              <li><code>c</code> is the column index</li>
+              <li><code>new_value</code> is the new value to assign</li>
+            </ul>
+            <li>Check if the index is valid</li>
+            <li>If valid, update <code>matrix[r][c]</code> with <code>new_value</code> and print a confirmation message
             </li>
+            <li>If invalid, print <code>"Invalid index!"</code></li>
           </ul>
 
-
-
-
-          <p><strong>Check for Sufficient Elements:</strong></p>
+          <p><strong>Final Output:</strong></p>
           <ul style="list-style-type:disc">
-            <li>Compare the length of <code>elements</code> with <code>m × n</code></li>
-            <li>If <code>elements</code> has fewer than <code>m × n</code> values, print:
-              <code>"insufficient elements to populate the matrix"</code> and return <code>null</code>
-            </li>
+            <li>First, display the entire matrix after creation</li>
+            <li>Then, traverse and display the value at the specified index</li>
+            <li>Next, manipulate the matrix and show the updated matrix</li>
           </ul>
 
-          <p><strong>Initialize the Matrix:</strong></p>
-          <ul style="list-style-type:disc">
-            <li>Create an empty array <code>M</code> to store the final matrix</li>
-            <li>Declare a variable <code>index = 0</code> to track the position in <code>elements</code></li>
-          </ul>
-
-          <p><strong>Populate the Matrix Row-Wise:</strong></p>
-          <ul style="list-style-type:disc">
-            <li>Loop through <code>m</code> rows:
-              <ul style="list-style-type:square">
-                <li>Create an empty array <code>row</code></li>
-                <li>Loop through <code>n</code> columns:
-                  <ul style="list-style-type:circle">
-                    <li>Add <code>elements[index]</code> to <code>row</code></li>
-                    <li>Increment <code>index</code></li>
-                  </ul>
-                </li>
-                <li>Append the completed <code>row</code> to <code>M</code></li>
-              </ul>
-            </li>
-          </ul>
-          <p><strong>Return the Matrix:</strong></p>
-          <ul style="list-style-type:disc">
-            <li>After the loops complete, return <code>M</code>, which now holds the <code>m × n</code> matrix</li>
-          </ul>
         </div>
       </div>
 
@@ -254,25 +259,82 @@ This virtual setup ensures accessible, self-paced learning, especially for those
                 #include &lt;vector&gt;
                 using namespace std;
 
-                vector&lt;vector&lt;int&gt;&gt; matrix(int m, int n, const vector&lt;int&gt;& elements) {
-                  if (elements.size() < m * n) {
-                    cout << "insufficient elements to populate the matrix!" << endl;
-                    return {}; 
-                  }
-
-                  vector&lt;vector&lt;int&gt;&gt; M;
-                  int index = 0;
-
-                  for (int i = 0; i < m; ++i) {
-                    vector&lt;int&gt; row;
-                    for (int j = 0; j < n; ++j) {
-                      row.push_back(elements[index]);
-                      index++;
+                // Step 1: Create the matrix
+                vector&lt;vector&lt;int&gt;&gt; createMatrix(int m, int n) {
+                  vector&lt;vector&lt;int&gt;&gt; matrix(m, vector&lt;int&gt;(n));
+                
+                  cout << "Enter " << m * n << " elements one by one:" << endl;
+                  for (int i = 0; i < m; i++) {
+                    for (int j = 0; j < n; j++) {
+                      cin >> matrix[i][j];
                     }
-                    M.push_back(row);
+                  }
+    
+                  return matrix;
+                }
+
+                // Step 2: Traverse the matrix by index
+                void traverseMatrix(const vector&lt;vector&lt;int&gt;&gt;& matrix, int r, int c) {
+                  if (r < 0 || r >= matrix.size() || c < 0 || c >= matrix[0].size()) {
+                    cout << "Invalid index!" << endl;
+                  } else {
+                  cout << "Value at index [" << r << "][" << c << "] is " << matrix[r][c] << endl;
+                  }
+                }
+
+                // Step 3: Manipulate the matrix at a given index
+                void manipulateMatrix(vector&lt;vector&lt;int&gt;&gt;& matrix, int r, int c, int newValue) {
+                  if (r < 0 || r >= matrix.size() || c < 0 || c >= matrix[0].size()) {
+                    cout << "Invalid index!" << endl;
+                  } else {
+                  matrix[r][c] = newValue;
+                  cout << "Updated value at index [" << r << "][" << c << "] to " << newValue << endl;
+                  }
+                }
+
+                int main() {
+                  int m, n;
+                  cout << "Enter number of rows: ";
+                  cin >> m;
+                  cout << "Enter number of columns: ";
+                  cin >> n;
+                  vector&lt;vector&lt;int&gt;&gt; mat = createMatrix(m, n);
+
+                  cout << "\nMatrix:" << endl;
+                  for (const auto& row : mat) {
+                    for (int val : row) {
+                      cout << val << " ";
+                    }
+                    cout << endl;
                   }
 
-                  return M;
+                  // Traversal
+                  int r, c;
+                  cout << "\nEnter row index to traverse: ";
+                  cin >> r;
+                  cout << "Enter column index to traverse: ";
+                  cin >> c;
+                  traverseMatrix(mat, r, c);
+
+                  // Manipulation
+                  cout << "\nEnter row index to update: ";
+                  cin >> r;
+                  cout << "Enter column index to update: ";
+                  cin >> c;
+                  int newValue;
+                  cout << "Enter new value: ";
+                  cin >> newValue;
+                  manipulateMatrix(mat, r, c, newValue);
+
+                  cout << "\nUpdated Matrix:" << endl;
+                  for (const auto& row : mat) {
+                    for (int val : row) {
+                      cout << val << " ";
+                      }
+                      cout << endl;
+                    }
+
+                  return 0;
                 }
 
               </code></pre>
@@ -282,23 +344,62 @@ This virtual setup ensures accessible, self-paced learning, especially for those
           <div id="pythonCode" class="code-block">
             <div class="code-content">
               <pre><code class="language-python"># Python Code Example
-                def matrix(m, n, elements):
+                # Step 1: Create the matrix
+                def create_matrix(m,n):
                   if len(elements) < m * n:
                     print("insufficient elements to populate the matrix!")
                     return None
 
                   M = []
-                  index = 0
-
                   for i in range(m):
                     row = []
                     for j in range(n):
-                      row.append(elements[index])
-                      index += 1
+                     val = input(f"Element at ({i+1},{j+1}): ")
+                     row.append(val)
                     M.append(row)
 
                   return M
 
+                # Step 2: Traverse the matrix by index
+                def traverse_matrix(matrix, r, c):
+                  if r < 0 or r >= len(matrix) or c < 0 or c >= len(matrix[0]):
+                    print("Invalid index!")
+                  else:
+                    print(f"Value at index [{r}][{c}] is {matrix[r][c]}")
+
+                
+                # Step 3: Manipulate the matrix at a given index
+                def manipulate_matrix(matrix, r, c, new_value):
+                  if r < 0 or r >= len(matrix) or c < 0 or c >= len(matrix[0]):
+                    print("Invalid index!")
+                  else:
+                    matrix[r][c] = new_value
+                      print(f"Updated value at index [{r}][{c}] to {new_value}")
+
+                # Example usage:
+                m = int(input("Enter number of rows: "))
+                n = int(input("Enter number of columns: "))
+          
+                mat = create_matrix(m, n)
+
+                print("\nMatrix:")
+                for row in mat:
+                  print(row)
+
+                # Traversal
+                r = int(input("\nEnter row index to traverse: "))
+                c = int(input("Enter column index to traverse: "))
+                traverse_matrix(mat, r, c)
+
+                # Manipulation
+                r = int(input("\nEnter row index to manipulate: "))
+                c = int(input("Enter column index to manipulate: "))
+                new_value = int(input("Enter new value: "))
+                manipulate_matrix(mat, r, c, new_value)
+
+                print("\nUpdated Matrix:")
+                for row in mat:
+                  print(row)
               </code></pre>
               <button class="copy-button">Copy</button>
             </div>
@@ -306,187 +407,212 @@ This virtual setup ensures accessible, self-paced learning, especially for those
         </div>
       </div>
 
-<!-- Practice -->
-<div class="container" id="practice">
+      <!-- Practice -->
+      <div class="container" id="practice">
 
-  <!-- Step 0: Introduction -->
-  <div id="matrixSteps" class="matrix-steps">
-    <h2 class="step-title">Matrix Learning Journey</h2>
-    <p id="stepExplanation">
-      Welcome! In this lab, we will learn matrices step by step:
-      <br> 1. Creation → 2. Traversal → 3. Manipulation
-    </p>
-    <button id="stepNextBtn">Next</button>
-  </div>
+        <!-- Step 0: Introduction -->
+        <div id="matrixSteps" class="matrix-steps">
+          <h2 class="step-title">Matrix Learning Journey</h2>
+          <p id="stepExplanation">
+            Welcome! In this lab, we will learn matrices step by step:
+            <br> 1. Creation → 2. Traversal → 3. Manipulation
+          </p>
+          <button id="stepNextBtn">Next</button>
+        </div>
 
-  <!-- Step 1: Matrix Creation (hidden initially) -->
-  <div id="creationStep" style="display:none;">
-    <div class="title">Step 1: Creating Matrix</div>  
-    <div class="content">
-      <p>Enter number of rows: <input type="number" id="row" /></p>
-      <p>Enter number of columns: <input type="number" id="column" /></p>
+        <!-- Step 1: Matrix Creation (hidden initially) -->
+        <div id="creationStep" style="display:none;">
+          <div class="title">Step 1: Creating Matrix</div>
+          <div class="content">
+            <p>
+              Matrix creation is the first step where we define the size of the matrix
+              (rows × columns) and input its elements. This allows us to represent data
+              in a structured grid form, which can then be used for different operations.
+            </p>
+            <div class="input-group">
+              <label for="row">Enter number of rows:</label>
+              <input type="number" id="row" />
+            </div>
+            <div class="input-group">
+              <label for="column">Enter number of columns:</label>
+              <input type="number" id="column" />
+            </div>
 
-      <!-- Choose input method -->
-      <div class="switch-container">
-        <button type="button" id="manualBtn">Fill Manually</button>
-        <button type="button" id="randomBtn">Random Fill</button>
+            <!-- Choose input method -->
+            <div class="switch-container">
+              <button type="button" id="manualBtn">Fill Manually</button>
+              <button type="button" id="randomBtn">Random Fill</button>
+            </div>
+
+            <div class="input-group" id="elementsInput" style="display:none;">
+              <label for="values">Enter elements (comma-separated):</label>
+              <input type="text" id="values">
+            </div>
+
+            <div class="button-practice">
+              <button type="button" id="enterBtn" style="text-align: center" onclick="display()">ENTER</button>
+              <button type="button" id="resetButton" class="hidden" onclick="resetMatrix()">RESET</button>
+            </div>
+
+            <div id="matrixContainer"></div>
+            <button id="goToTraversalBtn" class="hidden">Go to Traversal →</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Matrix Traversal -->
+        <div id="traversalStep" style="display:none;">
+          <div class="title">Step 2: Traversing Matrix</div>
+          <div class="content">
+            <p>Matrix traversal means visiting each element of the matrix in a systematic way.
+              Common traversal methods include row-wise (left to right, top to bottom)
+              and column-wise (top to bottom, left to right),In this section we are only focusing on row-wise traversal.
+              Traversal helps us
+              process or display all elements in order.</p>
+            <p><strong>NOTE:</strong>row and column index starts from 0</p>
+
+            <div class="input-group">
+              <label for="traverseRow">Enter row index:</label>
+              <input type="number" id="traverseRow" />
+            </div>
+            <div class="input-group">
+              <label for="traverseCol">Enter column index:</label>
+              <input type="number" id="traverseCol" />
+            </div>
+
+            <div class="button-practice">
+              <button id="traverseBtn">Traverse</button>
+              <button id="traversalResetBtn" class="hidden">Reset</button>
+            </div>
+
+            <div id="traversalMatrixContainer"></div>
+            <div id="traversalExplanation" class="explanation"></div>
+
+            <button id="traversalNextBtn" class="hidden">Go to Manipulation →</button>
+          </div>
+        </div>
       </div>
+        <!-- Step 3: Matrix Manipulation -->
+        <div id="manipulationStep" style="display:none;">
+          <div class="title">Step 3: Manipulating Matrix</div>
+          <div class="content">
+            <p>Matrix manipulation involves updating or modifying elements of the matrix.
+              This includes changing values at specific indices. </p>
+            <p><strong>NOTE: </strong>row and column index starts from 0</p>
 
-      <p id="elementsInput" style="display:none;">
-        Enter elements (comma-separated): 
-        <input type="text" id="values">
-      </p>
+            <div class="input-group">
+              <label for="manipulateRow">Enter row index:</label>
+              <input type="number" id="manipulateRow" />
+            </div>
+            <div class="input-group">
+              <label for="manipulateCol">Enter column index:</label>
+              <input type="number" id="manipulateCol" />
+            </div>
+            <div class="input-group">
+              <label for="newValue">Enter new value:</label>
+              <input type="number" id="newValue" />
+            </div>
 
-      <div class="button-practice">
-        <button type="button" id="enterBtn" style="text-align: center" onclick="display()">ENTER</button>
-        <button type="button" id="resetButton" class="hidden" onclick="resetMatrix()">RESET</button>
-      </div>
+            <div class="button-practice">
+              <button id="manipulateBtn">Update Matrix</button>
+              <button id="manipulationResetBtn" class="hidden">Reset</button>
+            </div>
 
-      <div id="matrixContainer"></div>
-      <button id="goToTraversalBtn" class="hidden">Go to Traversal →</button>
-
-    </div>
-  </div>
-
-   
-
-  <!-- Step 2: Matrix Traversal -->
-  <div id="traversalStep" style="display:none;">
-    <div class="title">Step 2: Traversing Matrix</div>
-    <div class="content">
-      <p>Enter index to traverse (row and column start from 0):</p>
-      <input type="number" id="traverseRow" placeholder="Row index"/>
-      <input type="number" id="traverseCol" placeholder="Column index"/>
-      <button id="traverseBtn">Traverse</button>
-
-      <div id="traversalMatrixContainer"></div>
-      <div id="traversalExplanation" class="explanation"></div>
-
-      <div class="button-practice">
-  <button id="traversalNextBtn" class="hidden">Go to Manipulation →</button>
-  <button id="traversalResetBtn" class="hidden">Reset</button>
-</div>
-
-
-
-    </div>
-  </div>    
-
-    <!-- Step 3: Matrix Manipulation -->
-  <div id="manipulationStep" style="display:none;">
-    <div class="title">Step 3: Manipulating Matrix</div>
-    <div class="content">
-      <p>Enter index to update and new value:</p>
-      <input type="number" id="manipulateRow" placeholder="Row index"/>
-      <input type="number" id="manipulateCol" placeholder="Column index"/>
-      <input type="number" id="newValue" placeholder="New value"/>
-      <button id="manipulateBtn">Update</button>
-
-      <div id="manipulationMatrixContainer"></div>
-      <div id="manipulationExplanation" class="explanation"></div>
-
-      <div class="button-practice">
-        <button id="manipulationResetBtn">Reset</button>
-      </div>
-    </div>
-  </div>
-  </div>
-
-</div>
+            <div id="manipulationMatrixContainer"></div>
+            <div id="manipulationExplanation" class="explanation"></div>
+          </div>
+        </div>
 
 
 
 
 
-      <!-- Results -->
-      <div class="container" id="result">
-        <div class="title">Result</div>
-        <div class="content">
-          <p>This virtual lab provides hands-on experience with 2D matrix generation using various techniques. 
-            It enables users to explore different methods, implement code in multiple languages, and visualize the results for better comprehension.
-             Comprehending 2D matrices is crucial for domains like numerical computing, cryptography, and machine learning.</p></div>
-      </div>
+        <!-- Results -->
+        <div class="container" id="result">
+          <div class="title">Result</div>
+          <div class="content">
+            <p>This virtual lab provides hands-on experience with 2D matrix generation using various techniques.
+              It enables users to explore different methods, implement code in multiple languages, and visualize the
+              results for better comprehension.
+              Comprehending 2D matrices is crucial for domains like numerical computing, cryptography, and machine
+              learning.</p>
+          </div>
+        </div>
 
-      <!-- Quiz -->
-      <div class="container" id="quiz">
-  <div class="title">Quiz</div>
-  <p id="question" class="quiz-question"></p>
-  <div id="choices" class="choices"></div>
+        <!-- Quiz -->
+        <div class="container" id="quiz">
+          <div class="title">Quiz</div>
+          <p id="question" class="quiz-question"></p>
+          <div id="choices" class="choices"></div>
 
-  <div class="quiz-buttons">
-    <button id="next-btn" class="next-button">Next</button>
-    <button id="retake-btn" class="retake-button" style="display: none;">Retake Quiz</button>
-  </div>
+          <div class="quiz-buttons">
+            <button id="next-btn" class="next-button">Next</button>
+            <button id="retake-btn" class="retake-button" style="display: none;">Retake Quiz</button>
+          </div>
 
-  <div id="quiz-report" class="quiz-report" style="display: none;"></div>
-</div>
+          <div id="quiz-report" class="quiz-report" style="display: none;"></div>
+        </div>
 
         <!-- Section to display quiz report -->
 
-      <!-- References -->
-      <div class="container" id="references">
-        <div class="title">References</div>
-        <div class="content">
-          <ul class="ref-list" style="list-style-type :disc" >
-            <li>
-              <strong>Python Matrix Basics</strong>
-              <ul style="list-style-type :circle">
-                <li >
-              <span> Python Lists -  W3Schools </span></li>
-            </li>
-              </ul>
-              
-            <li>
-               <strong>Matrix in Math & Applications</strong> 
-            <ul style="list-style-type :circle">
-               <li >
-              <span> Matrix Applications - Linear Algebra </span>
-            </li>
+        <!-- References -->
+        <div class="container" id="references">
+          <div class="title">References</div>
+          <div class="content">
+            <ul class="ref-list" style="list-style-type :disc">
+              <li>
+                <strong>Python Matrix Basics</strong>
+                <ul style="list-style-type :circle">
+                  <li>
+                    <span> Python Lists - W3Schools </span>
+                  </li>
+              </li>
             </ul>
-            </li>
-           
-           
-          </ul>
-        </div>
-      </div>
 
-      <!-- Team & Tools -->
-      <div class="container" id="tnt">
-        <div class="title">Team & Tools</div>
-        <div class="content">
-          <h3>Students</h3>
-          <ul class="ref-list">
             <li>
-              <a href="profile url if you have" rel="noopener" target="_blank">
-                <span>
-                  <ol style="list-style-type:decimal">
-                    <li>Udita Puri : B.Sc.(H) Computer Science</li>
-                    <li>Latika Joshi : B.Sc.(H) Computer Science</li>
-                  </ol>
-                </span></a>
+              <strong>Matrix in Math & Applications</strong>
+              <ul style="list-style-type :circle">
+                <li>
+                  <span> Matrix Applications - Linear Algebra </span>
+                </li>
+              </ul>
             </li>
-          </ul>
-          <h3>Mentor</h3>
-          <ul class="ref-list" >
-            <li><span> Ms. Shiva Saini</span></li>
-          </ul>
-          <h3>Tools Used</h3>
-          <ul class="tools-list">
-            <li>
-              <span>Vanilla HTML, CSS, JS - for creating the web page</span>
-            </li>
-          </ul>
+
+
+            </ul>
+          </div>
         </div>
-      </div>
+
+        <!-- Team & Tools -->
+        <div class="container" id="tnt">
+          <div class="title">Team & Tools</div>
+          <div class="content">
+            <h3>Students</h3>
+            <ul class="ref-list">
+              <li>
+                <a href="profile url if you have" rel="noopener" target="_blank">
+                  <span>
+                    <ol style="list-style-type:decimal">
+                      <li>Udita Puri : B.Sc.(H) Computer Science</li>
+                      <li>Latika Joshi : B.Sc.(H) Computer Science</li>
+                    </ol>
+                  </span></a>
+              </li>
+            </ul>
+            <h3>Mentor</h3>
+            <ul class="ref-list">
+              <li><span> Ms. Shiva Saini</span></li>
+            </ul>
+            <h3>Tools Used</h3>
+            <ul class="tools-list">
+              <li>
+                <span>Vanilla HTML, CSS, JS - for creating the web page</span>
+              </li>
+            </ul>
+          </div>
+        </div>
     </section>
   </div>
-  <script>
-    hljs.highlightAll();
-    function toggleMenu() {
-      const menu = document.querySelector(".nav-menu");
-      menu.classList.toggle("show");
-    }
-  </script>
+  
   <script src="script.js"></script>
   <script src="practiceScript.js"></script>
 

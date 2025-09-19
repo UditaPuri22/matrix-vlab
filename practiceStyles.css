@@ -1,156 +1,189 @@
-/* General Layout */
-body {
-  font-family: Arial, sans-serif;
-  background: #f7f9fc;
-  margin: 0;
-  padding: 20px;
-  color: #333;
-}
-
-h2 {
-  margin-top: 20px;
-  font-size: 20px;
-  color: #1a3c6d;
-}
-
-.hidden {
-  display: none;
-}
-
-/* Matrix Grid */
+/* Shared container */
+#practice,
 .matrix-container {
-  margin: 20px 0;
-  text-align: center;
+  width: 95%;
+  max-width: 600px;
+  text-align: center; /* center align all content */
+  margin: 0 auto 20px auto;
 }
 
-.matrix-grid {
-  display: grid;
-  gap: 8px;
-  justify-content: center;
-  margin: 15px 0;
-}
-
-.cell,
-.matrix-cell {
-  width: 50px;
-  height: 50px;
-  border: 2px solid #1a3c6d;
-  border-radius: 6px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  background: #fff;
-  font-size: 16px;
-  transition: background 0.3s, transform 0.2s;
-}
-
-/* During creation */
-.cell.empty {
-  background: #e3e9f2;
-  color: #aaa;
-}
-
-.cell.filled {
-  background: #cfe2ff;
-  color: #1a3c6d;
-}
-
-/* Traversal + Manipulation */
-.matrix-cell {
-  background: #eaf1fb;
-  color: #1a3c6d;
-}
-
-.matrix-cell.highlight {
-  background: #ffd966;
-  color: #000;
-  transform: scale(1.1);
-  border-color: #ff9900;
+/* Inputs */
+input[type="number"],
+input[type="text"] {
+  padding: 6px;
+  width: 150px;
+  margin: 6px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  display: inline-block;
 }
 
 /* Buttons */
 button {
-  background: #1a3c6d;
+  margin: 10px 5px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #3b82f6;
   color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+.button-practice {
+  text-align: center;
+  margin-top: 10px;
+}
+button:hover {
+  background-color: #2563eb;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Input group inline form */
+.input-group {
+  display: inline-flex;     /* keep label + input on the same line */
+  align-items: center;
+  margin: 8px 12px;         /* spacing between groups */
+}
+
+.input-group label {
+  margin-right: 8px;        /* small gap between label and input */
+  font-weight: 500;
+  color: #111827;
+  white-space: nowrap;      /* prevents label text from wrapping */
+}
+
+.input-group input {
+  padding: 6px;
+  width: 120px;             /* uniform input width */
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+
+
+
+/* Card-like container */
+.matrix-container,#traversalMatrixContainer,#manipulationMatrixContainer {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+
+/* Matrix grid */
+.matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 50px);
+  gap: 10px;
+  justify-content: center;
+  margin: 20px 0;
+}
+.cell {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  border-radius: 6px;
+  background-color: #e5e7eb;
+  font-size: 16px;
+  color: #111827;
+}
+.cell.filled {
+  background-color: #93c5fd;
+}
+.matrix-cell {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  font-weight: bold;
+  background-color: #f3f4f6;
+  font-size: 16px;
+  margin: 2px;
+}
+.matrix-cell.highlight {
+  background-color: #fbbf24; /* yellow highlight */
+}
+
+/* Messages & Explanations */
+.message {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.explanation {
+  font-size: 14px;
+  color: #1d4ed8;
+  margin-top: 10px;
+}
+
+/* Switch buttons */
+.switch-container button {
+  margin: 5px;
+  padding: 8px 16px;
   border: none;
   border-radius: 8px;
-  padding: 8px 16px;
-  font-size: 14px;
+  background-color: teal;
+  color: white;
   cursor: pointer;
-  margin: 5px;
-  transition: background 0.3s, transform 0.2s;
-}
-
-button:hover {
-  background: #274d91;
-  transform: translateY(-2px);
-}
-
-button.hidden {
-  display: none;
-}
-
-/* Explanations & Messages */
-.message {
-  margin-top: 10px;
   font-size: 14px;
+}
+.switch-container button:hover {
+  background-color: darkcyan;
+}
+
+/* Step headers */
+.matrix-steps {
+  text-align: center;
+  padding: 5px;
+}
+.matrix-steps .step-title {
+  font-size: 25px;
   font-weight: bold;
-  color: #444;
+  color: #1f2937;
+  margin-bottom: 12px;
+}
+#stepExplanation {
+  font-size: 18px;
+  margin-bottom: 18px;
+  color: #374151;
+  line-height: 1.6;
+}
+#stepNextBtn {
+  padding: 10px 20px;
+  font-size: 19px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background-color: #16a34a;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#stepNextBtn:hover {
+  background-color: #15803d;
 }
 
-.explanation {
-  margin-top: 8px;
-  font-style: italic;
-  color: #555;
-}
-
-/* Input fields */
-input[type="number"],
-input[type="text"] {
-  padding: 6px 10px;
-  margin: 5px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  width: 80px;
-}
-
-input[type="number"]:focus,
-input[type="text"]:focus {
-  border-color: #1a3c6d;
-  outline: none;
-  box-shadow: 0 0 5px rgba(26, 60, 109, 0.3);
-}
-/* Center content for all steps */
-.container .content {
+/* === Traversal Step (Step 2) === */
+#traversalStep .content {
   display: flex;
   flex-direction: column;
-  align-items: center; /* center horizontally */
-  justify-content: center; /* optional vertical centering */
-  gap: 15px; /* spacing between elements */
-  text-align: center; /* text inside inputs/buttons centered */
+  align-items: center;
 }
 
-/* Center buttons specifically */
-.button-practice {
+
+/* === Manipulation Step (Step 3) === */
+#manipulationStep .content {
   display: flex;
-  justify-content: center;
-  gap: 10px; /* space between buttons */
-  margin-top: 10px;
+  flex-direction: column;
+  
 }
 
-/* Center the matrix grid inside its container */
-.matrix-container,
-#traversalMatrixContainer,
-#manipulationMatrixContainer {
-  display: flex;
-  justify-content: center;
-  margin-top: 15px;
-}
-
-/* Optional: center the step titles */
-.title, .step-title {
-  text-align: center;
-  margin-bottom: 10px;
-}

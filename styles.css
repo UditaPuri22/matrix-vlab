@@ -622,3 +622,11 @@ input[type="radio"] {
 }
 
 
+pre code.hljs {
+  background: #1e1e1e !important;
+  color: #f8f8f2 !important;
+  padding: 16px;
+  border-radius: 8px;
+  display: block;
+  overflow-x: auto;
+}
