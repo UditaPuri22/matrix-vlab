@@ -3,7 +3,7 @@
 .matrix-container {
   width: 95%;
   max-width: 600px;
-  text-align: center; /* center align all content */
+  text-align: justify; 
   margin: 0 auto 20px auto;
 }
 
@@ -28,6 +28,7 @@ button {
   color: white;
   cursor: pointer;
   font-weight: bold;
+  text-align: center;
 }
 .button-practice {
   text-align: center;
@@ -43,21 +44,21 @@ button:hover {
 
 /* Input group inline form */
 .input-group {
-  display: inline-flex;     /* keep label + input on the same line */
+  display: inline-flex;    
   align-items: center;
-  margin: 8px 12px;         /* spacing between groups */
+  margin: 8px 12px;         
 }
 
 .input-group label {
-  margin-right: 8px;        /* small gap between label and input */
+  margin-right: 8px;       
   font-weight: 500;
   color: #111827;
-  white-space: nowrap;      /* prevents label text from wrapping */
+  white-space: nowrap;      
 }
 
 .input-group input {
   padding: 6px;
-  width: 120px;             /* uniform input width */
+  width: 120px;             
   border-radius: 5px;
   border: 1px solid #ccc;
 }
@@ -65,13 +66,13 @@ button:hover {
 
 
 
-/* Card-like container */
 .matrix-container,#traversalMatrixContainer,#manipulationMatrixContainer {
   padding: 20px;
   border-radius: 10px;
   background-color: white;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   margin-top: 20px;
+  text-align: center;
 }
 
 /* Matrix grid */
@@ -118,6 +119,7 @@ button:hover {
   color: green;
   font-weight: bold;
   margin-top: 10px;
+  text-align: center;
 }
 .explanation {
   font-size: 14px;
@@ -155,7 +157,14 @@ button:hover {
   font-size: 18px;
   margin-bottom: 18px;
   color: #374151;
+  white-space: nowrap;
   line-height: 1.6;
+    text-align: center;
+    margin-top: 15px;
+}
+.explanation {
+    text-align: center;
+    margin-top: 15px;
 }
 #stepNextBtn {
   padding: 10px 20px;
@@ -187,3 +196,30 @@ button:hover {
   
 }
 
+
+.transpose-wrapper{
+
+display:flex;
+
+justify-content:center;
+
+gap:40px;
+
+margin:20px;
+
+flex-wrap:wrap;
+
+}
+
+.transpose-wrapper h3{
+
+text-align:center;
+
+margin-bottom:10px;
+
+}
+
+#transposeStep h3:not(.title) {
+    text-align: center;
+    margin: 20px 0 10px;
+}

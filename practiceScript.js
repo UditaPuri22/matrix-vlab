@@ -5,9 +5,10 @@ let matrix = []; // 2D representation for traversal & manipulation
 let matrixDiv, messageP, MatrixNextButton, MatrixResetButton, explanationP;
 
 // Predefined range for random matrix generation
+const MAX_SIZE = 8;
 const MIN_VALUE = 1;
 const MAX_VALUE = 50;
-
+const matrixContainer = document.getElementById("matrixContainer");
 // Buttons & Inputs
 const manualBtn = document.getElementById("manualBtn");
 const randomBtn = document.getElementById("randomBtn");
@@ -26,7 +27,7 @@ const creationStep = document.getElementById("creationStep");
 const matrixSteps = document.getElementById("matrixSteps");
 const traversalStep = document.getElementById("traversalStep");
 const manipulationStep = document.getElementById("manipulationStep");
-
+const transposeStep = document.getElementById("transposeStep");
 // Traversal elements
 const traversalMatrixContainer = document.getElementById("traversalMatrixContainer");
 const traversalExplanation = document.getElementById("traversalExplanation");
@@ -46,6 +47,15 @@ const manipulateCol = document.getElementById("manipulateCol");
 const newValue = document.getElementById("newValue");
 const manipulateBtn = document.getElementById("manipulateBtn");
 
+// Transpose
+const transposeOriginalContainer = document.getElementById("transposeOriginalContainer");
+const transposeMatrixContainer = document.getElementById("transposeMatrixContainer");
+const transposeExplanation = document.getElementById("transposeExplanation");
+const transposeBtn = document.getElementById("transposeBtn");
+const transposeResetBtn = document.getElementById("transposeResetBtn");
+const goToTransposeBtn = document.getElementById("goToTransposeBtn");
+const transposeTitle = document.getElementById("transposeTitle");
+
 // Helpers
 function hideEnterButton() {
   enterBtn.classList.add('hidden');
@@ -53,20 +63,91 @@ function hideEnterButton() {
 function showEnterButton() {
   enterBtn.classList.remove('hidden');
 }
+function showInvalid(inputElement, message, targetContainer = null) {
+  inputElement.value = "";
+  inputElement.focus();
+
+  if (targetContainer) {
+    targetContainer.textContent = message;
+    targetContainer.style.color = "red";
+  } else {
+    const error = document.createElement("p");
+    error.className = "message";
+    error.style.color = "red";
+    error.innerText = message;
+
+    matrixContainer.innerHTML = "";
+    matrixContainer.appendChild(error);
+  }
+}
+
+function validateMatrixSize() {
+
+  row = parseInt(rowInput.value);
+  column = parseInt(colInput.value);
+
+  // Row empty
+  if (rowInput.value.trim() === "") {
+    showInvalid(rowInput, "Row cannot be empty.");
+    return false;
+  }
+
+  // Row integer
+  if (!Number.isInteger(Number(rowInput.value)) || row <= 0) {
+    showInvalid(rowInput, "Row must be a positive whole number.");
+    return false;
+  }
+
+  // Maximum row
+  if (row > MAX_SIZE) {
+    showInvalid(rowInput, `Maximum allowed rows is ${MAX_SIZE}.`);
+    return false;
+  }
+
+  // Column empty
+  if (colInput.value.trim() === "") {
+    showInvalid(colInput, "Column cannot be empty.");
+    return false;
+  }
+
+  // Column integer
+  if (!Number.isInteger(Number(colInput.value)) || column <= 0) {
+    showInvalid(colInput, "Column must be a positive whole number.");
+    return false;
+  }
+
+  // Maximum column
+  if (column > MAX_SIZE) {
+    showInvalid(colInput, `Maximum allowed columns is ${MAX_SIZE}.`);
+    return false;
+  }
+
+  return true;
+}
+
 
 // Mode selection
 // Hide ENTER initially
 enterBtn.style.display = "none";
 
 manualBtn.addEventListener("click", () => {
+
+  if (!validateMatrixSize()) return;
+
   elementsInput.style.display = "block";
-  enterBtn.style.display = "inline-block"; // show ENTER
+  enterBtn.style.display = "inline-block";
+
 });
 
 randomBtn.addEventListener("click", () => {
+
+  if (!validateMatrixSize()) return;
+
   elementsInput.style.display = "none";
-  enterBtn.style.display = "none"; // hide ENTER
+  enterBtn.style.display = "none";
+
   generateRandomMatrix();
+
 });
 
 // Step Flow
@@ -99,20 +180,59 @@ function display() {
   row = parseInt(rowInput.value);
   column = parseInt(colInput.value);
   let values = document.getElementById("values").value;
-
-  const matrixContainer = document.getElementById("matrixContainer");
+  if (!validateMatrixSize()) return;
   matrixContainer.innerHTML = "";
 
-  if (isNaN(row) || isNaN(column) || values.trim() === "") {
-    matrixContainer.innerHTML = `<p class="message" style="color: red;">Please enter valid numbers and elements!</p>`;
+  if (rowInput.value.trim() === "") {
+    showInvalid(rowInput, "Row cannot be empty.");
+    return;
+  }
+
+  if (!Number.isInteger(Number(rowInput.value)) || row <= 0) {
+    showInvalid(rowInput, "Row must be a positive whole number.");
+    return;
+  }
+
+  if (row > MAX_SIZE) {
+    showInvalid(rowInput, `Maximum allowed rows is ${MAX_SIZE}.`, null);
+    return;
+  }
+
+  if (colInput.value.trim() === "") {
+    showInvalid(colInput, "Column cannot be empty.");
+    return;
+  }
+
+  if (!Number.isInteger(Number(colInput.value)) || column <= 0) {
+    showInvalid(colInput, "Column must be a positive whole number.");
+    return;
+  }
+
+  if (column > MAX_SIZE) {
+    showInvalid(colInput, `Maximum allowed columns is ${MAX_SIZE}.`, null);
+    return;
+  }
+
+  // 🔹 Values validation
+  if (values === "") {
+    showInvalid(document.getElementById("values"), "Please enter matrix values.");
     return;
   }
 
   let elementListRaw = values.split(",").map(num => num.trim());
-  if (elementListRaw.some(v => v === "" || isNaN(parseFloat(v)))) {
-    matrixContainer.innerHTML = `<p class="message" style="color: red;">Please enter only numbers separated by commas!</p>`;
+  if (elementListRaw.some(v => v === "" || !Number.isInteger(Number(v)))) {
+    showInvalid(document.getElementById("values"),
+      "Only whole numbers are allowed. Decimals and negatives are not permitted.");
     return;
   }
+
+
+  if (elementListRaw.some(v => Number(v) < 0)) {
+    showInvalid(document.getElementById("values"),
+      "Negative numbers are not allowed.");
+    return;
+  }
+
 
   elementList = elementListRaw.map(num => parseFloat(num));
   nextIndex = 0;
@@ -133,13 +253,9 @@ function generateRandomMatrix() {
   row = parseInt(rowInput.value);
   column = parseInt(colInput.value);
 
-  const matrixContainer = document.getElementById("matrixContainer");
+
   matrixContainer.innerHTML = "";
 
-  if (isNaN(row) || isNaN(column) || row <= 0 || column <= 0) {
-    matrixContainer.innerHTML = `<p class="message" style="color: red;">Enter valid rows & columns!</p>`;
-    return;
-  }
 
   elementList = [];
   for (let i = 0; i < row * column; i++) {
@@ -153,7 +269,7 @@ function generateRandomMatrix() {
 
 // Create grid
 function createMatrixGrid() {
-  const matrixContainer = document.getElementById("matrixContainer");
+
   matrixContainer.innerHTML = "";
 
   matrixDiv = document.createElement("div");
@@ -185,7 +301,11 @@ function createMatrixGrid() {
   MatrixNextButton = document.createElement("button");
   MatrixNextButton.textContent = "Next";
   MatrixNextButton.onclick = () => insertNextValue(grid);
-  matrixDiv.appendChild(MatrixNextButton);
+  const btnWrapper = document.createElement("div");
+  btnWrapper.className = "button-practice";
+  btnWrapper.appendChild(MatrixNextButton);
+
+  matrixDiv.appendChild(btnWrapper);
 
   resetButton.classList.remove("hidden");
   goToTraversalBtn.classList.remove("hidden");
@@ -212,7 +332,27 @@ function insertNextValue(grid) {
   }
 
   if (nextIndex === row * column) {
-    explanationP.textContent = "Matrix is now completely filled!";
+    
+    explanationP.innerHTML = `
+<div style="background:#f8fbff;
+border-left:5px solid #3b82f6;
+padding:15px;
+margin-top:15px;
+border-radius:8px;
+text-align:left;
+line-height:1.8;">
+
+<b>Matrix Size:</b> ${row} × ${column}<br><br>
+A matrix is created by arranging values into
+<b>${row}</b> row(s) and
+<b>${column}</b> column(s).
+<hr>
+✔ Total Rows : <b>${row}</b><br>
+✔ Total Columns : <b>${column}</b><br>
+✔ Total Elements : <b>${row*column}</b><br><br>
+✔ Every element is uniquely identified by its row and column index.
+</div>
+`;
     messageP.textContent = "All elements are filled!";
     MatrixNextButton.style.display = "none";
 
@@ -249,12 +389,72 @@ traverseBtn.addEventListener("click", () => {
   let c = parseInt(traverseCol.value);
   clearHighlights(traversalMatrixContainer);
 
-  if (isNaN(r) || isNaN(c) || r < 0 || r >= row || c < 0 || c >= column) {
-    traversalExplanation.textContent = "Invalid indices.";
+  // Check whole number first
+  if (!Number.isInteger(Number(traverseRow.value))) {
+    showInvalid(traverseRow, "Row index must be a whole number.", traversalExplanation);
     return;
   }
 
-  traversalExplanation.textContent = `Value at [${r}][${c}] is ${matrix[r][c]}.`;
+  if (!Number.isInteger(Number(traverseCol.value))) {
+    showInvalid(traverseCol, "Column index must be a whole number.", traversalExplanation);
+    return;
+  }
+
+  // Negative check
+  if (r < 0) {
+    showInvalid(traverseRow, "Row index cannot be negative. Indexing starts from 0.", traversalExplanation);
+    return;
+  }
+
+  if (c < 0) {
+    showInvalid(traverseCol, "Column index cannot be negative. Indexing starts from 0.", traversalExplanation);
+    return;
+  }
+
+  // Large index check with reason
+  if (r >= row) {
+    showInvalid(
+      traverseRow,
+      `Invalid row index. Matrix has ${row} rows, so maximum allowed index is ${row - 1}.`,
+      traversalExplanation
+    );
+    return;
+  }
+
+  if (c >= column) {
+    showInvalid(
+      traverseCol,
+      `Invalid column index. Matrix has ${column} columns, so maximum allowed index is ${column - 1}.`,
+      traversalExplanation
+    );
+    return;
+  }
+
+
+
+ traversalExplanation.innerHTML = `
+<div style="background:#f8fbff;
+border-left:5px solid #3b82f6;
+padding:15px;
+margin-top:15px;
+border-radius:8px;
+text-align:left;
+line-height:1.8;">
+<b>Selected Position :</b>
+(${r}, ${c})<br>
+<b>Element Found :</b>
+${matrix[r][c]}
+<hr>
+Traversal means visiting matrix elements one by one.
+The highlighted element is located using its
+<b>row index</b> and
+<b>column index</b>.
+<p style="color:#15803d;font-weight:bold;">
+Every matrix element can be accessed uniquely using its row and column indices.
+</p>
+
+</div>
+`;
   highlightCell(traversalMatrixContainer, r, c);
 
   // ✅ Show buttons only after a valid traversal
@@ -285,25 +485,105 @@ traversalNextBtn.addEventListener("click", () => {
   displayMatrix(matrix, manipulationMatrixContainer);
 });
 
+goToTransposeBtn.addEventListener("click", () => {
+
+  manipulationStep.style.display = "none";
+
+  transposeStep.style.display = "block";
+
+  displayMatrix(
+    matrix,
+    transposeOriginalContainer
+  );
+
+});
+
 // Manipulation
 manipulateBtn.addEventListener("click", () => {
   let r = parseInt(manipulateRow.value);
   let c = parseInt(manipulateCol.value);
   let val = parseInt(newValue.value);
   clearHighlights(manipulationMatrixContainer);
-
-  if (isNaN(r) || isNaN(c) || isNaN(val) || r < 0 || r >= row || c < 0 || c >= column) {
-    manipulationExplanation.textContent = "Invalid input.";
+  if (!Number.isInteger(Number(newValue.value))) {
+    showInvalid(
+      newValue,
+      "Please enter a valid whole number.",
+      manipulationExplanation
+    );
+    return;
+  }
+  // Whole number check
+  if (!Number.isInteger(Number(manipulateRow.value))) {
+    showInvalid(manipulateRow, "Row index must be a whole number.", manipulationExplanation);
     return;
   }
 
-  matrix[r][c] = val;
-  manipulationExplanation.textContent = `Matrix updated at [${r}][${c}].`;
+  if (!Number.isInteger(Number(manipulateCol.value))) {
+    showInvalid(manipulateCol, "Column index must be a whole number.", manipulationExplanation);
+    return;
+  }
+
+  // Negative check
+  if (r < 0) {
+    showInvalid(manipulateRow, "Row index cannot be negative. Indexing starts from 0.", manipulationExplanation);
+    return;
+  }
+
+  if (c < 0) {
+    showInvalid(manipulateCol, "Column index cannot be negative. Indexing starts from 0.", manipulationExplanation);
+    return;
+  }
+
+  // Large index check with explanation
+  if (r >= row) {
+    showInvalid(
+      manipulateRow,
+      `Invalid row index. Matrix has ${row} rows, so maximum allowed index is ${row - 1}.`,
+      manipulationExplanation
+    );
+    return;
+  }
+
+  if (c >= column) {
+    showInvalid(
+      manipulateCol,
+      `Invalid column index. Matrix has ${column} columns, so maximum allowed index is ${column - 1}.`,
+      manipulationExplanation
+    );
+    return;
+  }
+
+
+
+ let oldValue = matrix[r][c];
+
+matrix[r][c] = val;
+  manipulationExplanation.innerHTML = `
+<div style="background:#f8fbff;
+border-left:5px solid #3b82f6;
+padding:15px;
+margin-top:15px;
+border-radius:8px;
+text-align:left;
+line-height:1.8;">
+<b>Updated Position :</b>
+(${r}, ${c})<br>
+<b>Previous Value :</b>
+${oldValue}<br>
+<b>New Value :</b>
+${val}
+<hr>
+Only the selected matrix element has been modified.
+All other elements remain unchanged.
+The size of the matrix is also unchanged.
+</div>
+`;
   displayMatrix(matrix, manipulationMatrixContainer);
   highlightCell(manipulationMatrixContainer, r, c);
 
   manipulateBtn.classList.add("hidden");
   manipulationResetBtn.classList.remove("hidden");
+  goToTransposeBtn.classList.remove("hidden");
 });
 
 manipulationResetBtn.addEventListener("click", () => {
@@ -321,25 +601,40 @@ manipulationResetBtn.addEventListener("click", () => {
   // Redisplay the current matrix without changes
   displayMatrix(matrix, manipulationMatrixContainer);
   manipulateBtn.classList.remove("hidden");
-   manipulationResetBtn.classList.add("hidden");
+  manipulationResetBtn.classList.add("hidden");
 });
 
 // Helpers for traversal/manipulation
 function displayMatrix(matrixData, container) {
+
   container.innerHTML = "";
-  container.style.gridTemplateColumns = `repeat(${column}, 50px)`;
+
+  // Number of columns of the matrix being displayed
+  const cols = matrixData[0].length;
+
+  container.style.gridTemplateColumns = `repeat(${cols}, 50px)`;
+
   container.className = "matrix-grid";
 
   matrixData.forEach((rowArr, rIdx) => {
+
     rowArr.forEach((val, cIdx) => {
+
       let cell = document.createElement("div");
+
       cell.className = "matrix-cell";
+
       cell.textContent = val;
+
       cell.dataset.row = rIdx;
       cell.dataset.col = cIdx;
+
       container.appendChild(cell);
+
     });
+
   });
+
 }
 
 function highlightCell(container, r, c) {
@@ -356,3 +651,166 @@ function clearHighlights(container) {
     cell.classList.remove("highlight");
   });
 }
+
+function resetPractice() {
+  // Reset step counter
+  currentStep = 0;
+
+  // Clear matrix data
+  matrix = [];
+  elementList = [];
+  nextIndex = 0;
+  row = null;
+  column = null;
+
+  // Clear all inputs
+  rowInput.value = "";
+  colInput.value = "";
+  elementsInput.style.display = "none";
+  document.getElementById("values").value = "";
+
+  traverseRow.value = "";
+  traverseCol.value = "";
+
+  manipulateRow.value = "";
+  manipulateCol.value = "";
+  newValue.value = "";
+
+  // Clear containers
+  matrixContainer.innerHTML = "";
+  traversalMatrixContainer.innerHTML = "";
+  manipulationMatrixContainer.innerHTML = "";
+
+  // Reset explanations
+  traversalExplanation.textContent = "";
+  manipulationExplanation.textContent = "";
+  stepExplanation.textContent = "";
+
+  // Show only first step
+  creationStep.style.display = "block";
+  traversalStep.style.display = "none";
+  manipulationStep.style.display = "none";
+  transposeOriginalContainer.innerHTML = "";
+  transposeMatrixContainer.innerHTML = "";
+  transposeTitle.style.display = "none";
+  matrixSteps.style.display = "block";
+
+  // Reset buttons
+  stepNextBtn.style.display = "none";
+  stepNextBtn.textContent = "Step 1 → Creation";
+
+  enterBtn.style.display = "none";
+  resetButton.classList.add("hidden");
+  goToTraversalBtn.classList.add("hidden");
+
+  // Remove highlights
+  clearHighlights(traversalMatrixContainer);
+  clearHighlights(manipulationMatrixContainer);
+  transposeStep.style.display = "none";
+
+  transposeOriginalContainer.innerHTML = "";
+
+  transposeMatrixContainer.innerHTML = "";
+
+  transposeExplanation.textContent = "";
+
+  goToTransposeBtn.classList.add("hidden");
+
+  transposeBtn.classList.remove("hidden");
+
+  transposeResetBtn.classList.add("hidden");
+}
+
+
+transposeBtn.addEventListener("click", () => {
+
+  let transpose = [];
+
+  // Create transpose matrix
+  for (let c = 0; c < column; c++) {
+    transpose[c] = [];
+
+    for (let r = 0; r < row; r++) {
+      transpose[c][r] = matrix[r][c];
+    }
+  }
+
+  // Show transpose heading
+  transposeTitle.style.display = "block";
+
+  // Display transpose matrix
+  displayMatrix(transpose, transposeMatrixContainer);
+
+  // Show explanation
+  let explanation = `
+<div style="background:#f8fbff;
+            border-left:5px solid #3b82f6;
+            padding:15px;
+            margin-top:15px;
+            border-radius:8px;
+            text-align:left;
+            line-height:1.8;">
+
+<p>
+<b>Original Matrix Size:</b> ${row} × ${column}<br>
+<b>Transpose Matrix Size:</b> ${column} × ${row}
+</p>
+
+<p>
+In a transpose, <b>every row becomes a column</b> and
+<b>every column becomes a row</b>.
+Each element changes its position from
+<b>(i, j)</b> to <b>(j, i)</b>.
+</p>
+
+<hr>
+
+<b>Element Position Changes</b><br><br>
+`;
+
+  for (let r = 0; r < row; r++) {
+
+    for (let c = 0; c < column; c++) {
+
+      explanation +=
+        `Element <b>${matrix[r][c]}</b> :
+        (${r}, ${c}) → (${c}, ${r})<br>`;
+
+    }
+
+  }
+
+  explanation += `
+</div>
+`;
+
+  transposeExplanation.innerHTML = explanation;
+
+  // Hide Generate button & show Reset button
+  transposeBtn.classList.add("hidden");
+  transposeResetBtn.classList.remove("hidden");
+
+});
+
+
+transposeResetBtn.addEventListener("click", () => {
+
+  // Remove transpose matrix
+  transposeMatrixContainer.innerHTML = "";
+
+  // Remove explanation
+  transposeExplanation.textContent = "";
+
+  // Hide transpose title
+  transposeTitle.style.display = "none";
+
+  // Show Generate button again
+  transposeBtn.classList.remove("hidden");
+
+  // Hide Reset button
+  transposeResetBtn.classList.add("hidden");
+
+  // Redisplay original matrix
+  displayMatrix(matrix, transposeOriginalContainer);
+
+});
