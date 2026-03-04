@@ -630,3 +630,55 @@ pre code.hljs {
   display: block;
   overflow-x: auto;
 }
+
+.content p {
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.section-title {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.matrix-image {
+  display: block;
+  margin: 20px auto;
+  max-width: 100%;
+  height: 250px;
+  width: auto;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.matrix-example {
+  margin-left:25px;
+  margin-bottom: 20px;
+}
+
+.matrix-example pre {
+  display: inline-block;
+  text-align: left;
+  font-family: monospace;
+  background: #f4f4f4;
+  padding: 10px 15px;
+  border-radius: 6px;
+}
+
+.matrix-points,
+.matrix-types,
+.application-list {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+}
+
+.matrix-points li,
+.matrix-types li,
+.application-list li {
+  margin-bottom: 8px;
+}
