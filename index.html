@@ -95,86 +95,75 @@
         <div class="title">Aim</div>
         <div class="content">
           <p>
-            This virtual lab on 2D Matrices in Python is designed for undergraduate students. It
-aims to simplify the understanding of two-dimensional arrays by combining theory,
-visual aids. The lab offers hands-on practice with matrix
-operations such as creation, traversal and manipulation. By providing quizzes and
-step-by-step visualizations, it helps learners strengthen both conceptual clarity and
-problem solving skills. This virtual setup ensures accessible, self-paced learning,
-especially for those without access to physical lab resources.</p>
+            This virtual lab on 2D Matrices is designed for undergraduate students.
+            It aims to simplify the understanding of two-dimensional matrix by combining theory, visual aids, and
+            interactive coding tools.
+            The lab offers hands-on practice with matrix operations such as creation, traversal, and manipulation.
+          </p>
         </div>
       </div>
 
       <!-- Theory & Applications -->
-      <div class="container" id="theory">
-        <div class="title">Theory & Applications</div>
-        <div class="content">
-          <p>
-            A matrix is a structured rectangular array comprising numbers, symbols, or expressions organized into rows
-            and columns.
-            Matrices are foundational in subjects like mathematics, computer science, engineering, physics and data
-            science.
-            A 2D matrix (two-dimensional matrix) is a grid of elements arranged in horizontal rows and vertical columns.
-            Each element is identified by its position, given by a specific row and column index.
+<div class="container" id="theory">
+  <div class="title">Theory & Applications</div>
 
-            For example:
+  <div class="content">
 
+    <p>
+      A matrix is a structured rectangular array comprising numbers, symbols, or expressions organized into rows and columns.
+      Matrices are foundational in subjects like mathematics, computer science, engineering, physics, and data science.
+      A 2D matrix (two-dimensional matrix) is a grid of elements arranged in horizontal rows and vertical columns.
+      Each element is identified by its position, given by a specific row and column index.
+    </p>
 
-            <img src="/images/matrix.png" style="display: block;
-    margin: 20px auto;
-    max-width: 100%;
-    height: 250px;
-    width:auto;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    background-color: #f9f9f9;">
+    <p><strong>Example:</strong></p>
 
-            <b>A =&emsp;</b>[[1 2 3]
-            <br>&emsp;&emsp;&emsp;[4 5 6]
-            <br>&emsp;&emsp;&emsp;[7 8 9]]
+    <img src="/images/matrix.png"
+         class="matrix-image"
+         alt="Matrix Example">
 
-          <ul>
-            <li><b>Rows→ </b> Horizontal lines (e.g., [1, 2, 3] is the first row)</li>
-            <li><b>Columns →</b> Vertical lines (e.g., [1, 4, 7] is the first column)</li>
-            <li><b>Elements:</b> Individual values in the matrix (e.g., 5 is located at row 2, column 2)</li>
+    <div class="matrix-example">
+      <strong>A =</strong>
+      <pre>
+[1 2 3]
+[4 5 6]
+[7 8 9]
+      </pre>
+    </div>
 
-          </ul>
+    <ul class="matrix-points">
+      <li><b>Rows:</b> Horizontal lines (e.g., [1, 2, 3] is the first row)</li>
+      <li><b>Columns:</b> Vertical lines (e.g., [1, 4, 7] is the first column)</li>
+      <li><b>Elements:</b> Individual values in the matrix (e.g., 5 is located at row 2, column 2)</li>
+    </ul>
 
+    <h3 class="section-title">Types of 2D Matrices</h3>
 
+    <ol class="matrix-types">
+      <li><b>Square Matrix:</b> Same number of rows and columns (e.g., 3×3)</li>
+      <li><b>Rectangular Matrix:</b> Different number of rows and columns (e.g., 2×4)</li>
+      <li><b>Identity Matrix:</b> Diagonal elements are 1; all other elements are 0</li>
+      <li><b>Zero Matrix:</b> All elements are 0</li>
+      <li><b>Sparse Matrix:</b> Contains mostly zeroes</li>
+    </ol>
 
-          <strong>Types of 2D Matrices</strong>
-          <br /><br />
-          <ol>
-            <li><b>Square Matrix :</b> Same number of rows and columns (e.g., 3×3)</li>
-            <li><b>Rectangular Matrix :</b> Different number of rows and columns (e.g., 2×4)</li>
-            <li><b>Identity Matrix :</b> Diagonal elements are 1; all other elements are 0</li>
-            <li><b>Zero Matrix :</b> All elements are 0</li>
-            <li><b>Sparse Matrix :</b> Contains mostly zeroes</li>
-          </ol>
+    <h3 class="section-title">Applications</h3>
 
-          <strong>Applications</strong>
-          <br /><br />
-          <p>2D matrices play a crucial role across various domains:</p>
-          <ol>
-            <li><b>Computer Graphics :</b> Used for image rendering, transformations and geometric modeling.</li>
-            <li><b>Scientific Computing :</b> Essential for solving complex simulations and mathematical computations in
-              physics and engineering.</li>
-            <li><b>Machine Learning & Data Science :</b> Represent datasets, perform matrix operations and power neural
-              networks.</li>
-            <li><b>Cryptography :</b> Employed in encoding and decoding algorithms to secure information.</li>
-            <li><b>Game Development :</b> Used in pathfinding, map grids and collision detection.</li>
-            <li><b>Network Theory :</b> Represent graphs and connections using adjacency matrices.</li>
-          </ol>
-          <b>Objectives</b>
-          <br /><br />
-          </p>
+    <p>
+      2D matrices play a crucial role across various domains:
+    </p>
 
+    <ol class="application-list">
+      <li><b>Computer Graphics:</b> Used for image rendering, transformations, and geometric modeling.</li>
+      <li><b>Scientific Computing:</b> Essential for solving complex simulations and mathematical computations.</li>
+      <li><b>Machine Learning & Data Science:</b> Represent datasets, perform matrix operations, and power neural networks.</li>
+      <li><b>Cryptography:</b> Employed in encoding and decoding algorithms to secure information.</li>
+      <li><b>Game Development:</b> Used in pathfinding, map grids, and collision detection.</li>
+      <li><b>Network Theory:</b> Represent graphs and connections using adjacency matrices.</li>
+    </ol>
 
-
-        </div>
-      </div>
+  </div>
+</div>
 
       <div class="container" id="procedure">
         <div class="title">Procedure</div>
@@ -337,9 +326,6 @@ especially for those without access to physical lab resources.</p>
               <pre><code class="language-python"># Python Code Example
                 # Step 1: Create the matrix
                 def create_matrix(m,n):
-                  if len(elements) < m * n:
-                    print("insufficient elements to populate the matrix!")
-                    return None
 
                   M = []
                   for i in range(m):
@@ -414,7 +400,7 @@ especially for those without access to physical lab resources.</p>
         <!-- Step 1: Matrix Creation (hidden initially) -->
         <div id="creationStep" style="display:none;">
           <div class="title">Step 1: Creating Matrix</div>
-          <div class="content">
+          <div class="content" >
             <p>
               Matrix creation is the first step where we define the size of the matrix
               (rows × columns) and input its elements. This allows us to represent data
@@ -446,7 +432,12 @@ especially for those without access to physical lab resources.</p>
             </div>
 
             <div id="matrixContainer"></div>
+            <div class="button-practice">
+              <button onclick="resetPractice()">Start Again?</button>
             <button id="goToTraversalBtn" class="hidden">Go to Traversal →</button>
+            </div>
+            
+
           </div>
         </div>
 
@@ -456,10 +447,10 @@ especially for those without access to physical lab resources.</p>
           <div class="content">
             <p>Matrix traversal means visiting each element of the matrix in a systematic way.
               Common traversal methods include row-wise (left to right, top to bottom)
-              and column-wise (top to bottom, left to right),In this section we are only focusing on row-wise traversal.
+              and column-wise (top to bottom, left to right),In this virtual lab we are only focusing on row-wise traversal.
               Traversal helps us
               process or display all elements in order.</p>
-            <p><strong>NOTE:</strong>row and column index starts from 0</p>
+            <p><strong>NOTE:</strong>&nbsp;row and column index starts from 0</p>
 
             <div class="input-group">
               <label for="traverseRow">Enter row index:</label>
@@ -477,11 +468,15 @@ especially for those without access to physical lab resources.</p>
 
             <div id="traversalMatrixContainer"></div>
             <div id="traversalExplanation" class="explanation"></div>
+            <div class="button-practice">
+              <button onclick="resetPractice()">Start Again?</button>
+              <button id="traversalNextBtn" class="hidden">Go to Manipulation →</button>
+            </div>
+            
 
-            <button id="traversalNextBtn" class="hidden">Go to Manipulation →</button>
           </div>
         </div>
-      
+
         <!-- Step 3: Matrix Manipulation -->
         <div id="manipulationStep" style="display:none;">
           <div class="title">Step 3: Manipulating Matrix</div>
@@ -510,6 +505,10 @@ especially for those without access to physical lab resources.</p>
 
             <div id="manipulationMatrixContainer"></div>
             <div id="manipulationExplanation" class="explanation"></div>
+            <div class="button-practice">
+              <button onclick="resetPractice()">Start Again?</button>
+            </div>
+
           </div>
         </div>
       </div>
@@ -517,93 +516,94 @@ especially for those without access to physical lab resources.</p>
 
 
 
-        <!-- Results -->
-        <div class="container" id="result">
-          <div class="title">Result</div>
-          <div class="content">
-            <p>This virtual lab provides hands-on experience with 2D matrix generation using various techniques.
-              It enables users to explore different methods, implement code in multiple languages, and visualize the
-              results for better comprehension.
-              Comprehending 2D matrices is crucial for domains like numerical computing, cryptography, and machine
-              learning.</p>
-          </div>
+      <!-- Results -->
+      <div class="container" id="result">
+        <div class="title">Result</div>
+        <div class="content">
+          <p>This virtual lab provides hands-on experience with 2D matrix generation.
+            It enables users to explore different methods, implement code in languages like python and c++ , and visualize the
+            results for better comprehension.
+            By providing quizzes and step-by-step visualizations, it helps learners strengthen both conceptual clarity 
+            and problem-solving skills. This virtual setup ensures accessible, self-paced learning, especially 
+            for those without access to physical lab resources.</p>
+        </div>
+      </div>
+
+      <!-- Quiz -->
+      <div class="container" id="quiz">
+        <div class="title">Quiz</div>
+        <p id="question" class="quiz-question"></p>
+        <div id="choices" class="choices"></div>
+
+        <div class="quiz-buttons">
+          <button id="next-btn" class="next-button">Next</button>
+          <button id="retake-btn" class="retake-button" style="display: none;">Retake Quiz</button>
         </div>
 
-        <!-- Quiz -->
-        <div class="container" id="quiz">
-          <div class="title">Quiz</div>
-          <p id="question" class="quiz-question"></p>
-          <div id="choices" class="choices"></div>
+        <div id="quiz-report" class="quiz-report" style="display: none;"></div>
+      </div>
 
-          <div class="quiz-buttons">
-            <button id="next-btn" class="next-button">Next</button>
-            <button id="retake-btn" class="retake-button" style="display: none;">Retake Quiz</button>
-          </div>
+      <!-- Section to display quiz report -->
 
-          <div id="quiz-report" class="quiz-report" style="display: none;"></div>
-        </div>
-
-        <!-- Section to display quiz report -->
-
-        <!-- References -->
-        <div class="container" id="references">
-          <div class="title">References</div>
-          <div class="content">
-            <ul class="ref-list" style="list-style-type :disc">
-              <li>
-                <strong>Python Matrix Basics</strong>
-                <ul style="list-style-type :circle">
-                  <li>
-                    <span> Python Lists - W3Schools </span>
-                  </li>
-              </li>
-            </ul>
-
+      <!-- References -->
+      <div class="container" id="references">
+        <div class="title">References</div>
+        <div class="content">
+          <ul class="ref-list" style="list-style-type :disc">
             <li>
-              <strong>Matrix in Math & Applications</strong>
+              <strong>Python Matrix Basics</strong>
               <ul style="list-style-type :circle">
                 <li>
-                  <span> Matrix Applications - Linear Algebra </span>
+                  <span> Python Lists - W3Schools </span>
                 </li>
-              </ul>
             </li>
+          </ul>
 
-
-            </ul>
-          </div>
-        </div>
-
-        <!-- Team & Tools -->
-        <div class="container" id="tnt">
-          <div class="title">Team & Tools</div>
-          <div class="content">
-            <h3>Students</h3>
-            <ul class="ref-list">
+          <li>
+            <strong>Matrix in Math & Applications</strong>
+            <ul style="list-style-type :circle">
               <li>
-                <a href="profile url if you have" rel="noopener" target="_blank">
-                  <span>
-                    <ol style="list-style-type:decimal">
-                      <li>Udita Puri : B.Sc.(H) Computer Science</li>
-                      <li>Latika Joshi : B.Sc.(H) Computer Science</li>
-                    </ol>
-                  </span></a>
+                <span> Matrix Applications - Linear Algebra </span>
               </li>
             </ul>
-            <h3>Mentor</h3>
-            <ul class="ref-list">
-              <li><span> Ms. Shiva Saini</span></li>
-            </ul>
-            <h3>Tools Used</h3>
-            <ul class="tools-list">
-              <li>
-                <span>Vanilla HTML, CSS, JS - for creating the web page</span>
-              </li>
-            </ul>
-          </div>
+          </li>
+
+
+          </ul>
         </div>
+      </div>
+
+      <!-- Team & Tools -->
+      <div class="container" id="tnt">
+        <div class="title">Team & Tools</div>
+        <div class="content">
+          <h3>Students</h3>
+          <ul class="ref-list">
+            <li>
+              <a href="profile url if you have" rel="noopener" target="_blank">
+                <span>
+                  <ol style="list-style-type:decimal">
+                    <li>Udita Puri : B.Sc.(H) Computer Science</li>
+                    <li>Latika Joshi : B.Sc.(H) Computer Science</li>
+                  </ol>
+                </span></a>
+            </li>
+          </ul>
+          <h3>Mentor</h3>
+          <ul class="ref-list">
+            <li><span> Ms. Shiva Saini</span></li>
+          </ul>
+          <h3>Tools Used</h3>
+          <ul class="tools-list">
+            <li>
+              <span>Vanilla HTML, CSS, JS - for creating the web page</span>
+            </li>
+          </ul>
+        </div>
+      </div>
     </section>
   </div>
-  
+
   <script src="script.js"></script>
   <script src="practiceScript.js"></script>
 
