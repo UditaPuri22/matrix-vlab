@@ -120,6 +120,7 @@ button:hover {
   color: green;
   font-weight: bold;
   margin-top: 10px;
+  text-align:center;
 }
 .explanation {
   font-size: 14px;
