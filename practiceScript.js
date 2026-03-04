@@ -5,9 +5,10 @@ let matrix = []; // 2D representation for traversal & manipulation
 let matrixDiv, messageP, MatrixNextButton, MatrixResetButton, explanationP;
 
 // Predefined range for random matrix generation
+const MAX_SIZE = 8;
 const MIN_VALUE = 1;
 const MAX_VALUE = 50;
-
+const matrixContainer = document.getElementById("matrixContainer");
 // Buttons & Inputs
 const manualBtn = document.getElementById("manualBtn");
 const randomBtn = document.getElementById("randomBtn");
@@ -53,6 +54,26 @@ function hideEnterButton() {
 function showEnterButton() {
   enterBtn.classList.remove('hidden');
 }
+function showInvalid(inputElement, message, targetContainer = null) {
+  inputElement.value = "";
+  inputElement.focus();
+
+  if (targetContainer) {
+    targetContainer.textContent = message;
+    targetContainer.style.color = "red";
+  } else {
+    const error = document.createElement("p");
+    error.className = "message";
+    error.style.color = "red";
+    error.innerText = message;
+
+    matrixContainer.innerHTML = "";
+    matrixContainer.appendChild(error);
+  }
+}
+
+
+
 
 // Mode selection
 // Hide ENTER initially
@@ -100,19 +121,58 @@ function display() {
   column = parseInt(colInput.value);
   let values = document.getElementById("values").value;
 
-  const matrixContainer = document.getElementById("matrixContainer");
   matrixContainer.innerHTML = "";
 
-  if (isNaN(row) || isNaN(column) || values.trim() === "") {
-    matrixContainer.innerHTML = `<p class="message" style="color: red;">Please enter valid numbers and elements!</p>`;
+  if (rowInput.value.trim() === "") {
+    showInvalid(rowInput, "Row cannot be empty.");
+    return;
+  }
+
+  if (!Number.isInteger(Number(rowInput.value)) || row <= 0) {
+    showInvalid(rowInput, "Row must be a positive whole number.");
+    return;
+  }
+
+  if (row > MAX_SIZE) {
+    showInvalid(rowInput, `Maximum allowed rows is ${MAX_SIZE}.`, null);
+    return;
+  }
+
+  if (colInput.value.trim() === "") {
+    showInvalid(colInput, "Column cannot be empty.");
+    return;
+  }
+
+  if (!Number.isInteger(Number(colInput.value)) || column <= 0) {
+    showInvalid(colInput, "Column must be a positive whole number.");
+    return;
+  }
+
+  if (column > MAX_SIZE) {
+    showInvalid(colInput, `Maximum allowed columns is ${MAX_SIZE}.`, null);
+    return;
+  }
+
+  // 🔹 Values validation
+  if (values === "") {
+    showInvalid(document.getElementById("values"), "Please enter matrix values.");
     return;
   }
 
   let elementListRaw = values.split(",").map(num => num.trim());
-  if (elementListRaw.some(v => v === "" || isNaN(parseFloat(v)))) {
-    matrixContainer.innerHTML = `<p class="message" style="color: red;">Please enter only numbers separated by commas!</p>`;
+  if (elementListRaw.some(v => v === "" || !Number.isInteger(Number(v)))) {
+    showInvalid(document.getElementById("values"),
+      "Only whole numbers are allowed. Decimals and negatives are not permitted.");
     return;
   }
+
+
+  if (elementListRaw.some(v => Number(v) < 0)) {
+    showInvalid(document.getElementById("values"),
+      "Negative numbers are not allowed.");
+    return;
+  }
+
 
   elementList = elementListRaw.map(num => parseFloat(num));
   nextIndex = 0;
@@ -133,11 +193,28 @@ function generateRandomMatrix() {
   row = parseInt(rowInput.value);
   column = parseInt(colInput.value);
 
-  const matrixContainer = document.getElementById("matrixContainer");
+
   matrixContainer.innerHTML = "";
 
-  if (isNaN(row) || isNaN(column) || row <= 0 || column <= 0) {
-    matrixContainer.innerHTML = `<p class="message" style="color: red;">Enter valid rows & columns!</p>`;
+  // Row validation
+  if (!Number.isInteger(Number(rowInput.value)) || row <= 0) {
+    showInvalid(rowInput, "Row must be a positive whole number.");
+    return;
+  }
+
+  // Column validation
+  if (!Number.isInteger(Number(colInput.value)) || column <= 0) {
+    showInvalid(colInput, "Column must be a positive whole number.");
+    return;
+  }
+
+  if (row > MAX_SIZE) {
+    showInvalid(rowInput, `Maximum allowed rows is ${MAX_SIZE}.`);
+    return;
+  }
+
+  if (column > MAX_SIZE) {
+    showInvalid(colInput, `Maximum allowed columns is ${MAX_SIZE}.`);
     return;
   }
 
@@ -153,7 +230,7 @@ function generateRandomMatrix() {
 
 // Create grid
 function createMatrixGrid() {
-  const matrixContainer = document.getElementById("matrixContainer");
+
   matrixContainer.innerHTML = "";
 
   matrixDiv = document.createElement("div");
@@ -185,7 +262,11 @@ function createMatrixGrid() {
   MatrixNextButton = document.createElement("button");
   MatrixNextButton.textContent = "Next";
   MatrixNextButton.onclick = () => insertNextValue(grid);
-  matrixDiv.appendChild(MatrixNextButton);
+  const btnWrapper = document.createElement("div");
+  btnWrapper.className = "button-practice";
+  btnWrapper.appendChild(MatrixNextButton);
+
+  matrixDiv.appendChild(btnWrapper);
 
   resetButton.classList.remove("hidden");
   goToTraversalBtn.classList.remove("hidden");
@@ -249,10 +330,48 @@ traverseBtn.addEventListener("click", () => {
   let c = parseInt(traverseCol.value);
   clearHighlights(traversalMatrixContainer);
 
-  if (isNaN(r) || isNaN(c) || r < 0 || r >= row || c < 0 || c >= column) {
-    traversalExplanation.textContent = "Invalid indices.";
+  // Check whole number first
+  if (!Number.isInteger(Number(traverseRow.value))) {
+    showInvalid(traverseRow, "Row index must be a whole number.", traversalExplanation);
     return;
   }
+
+  if (!Number.isInteger(Number(traverseCol.value))) {
+    showInvalid(traverseCol, "Column index must be a whole number.", traversalExplanation);
+    return;
+  }
+
+  // Negative check
+  if (r < 0) {
+    showInvalid(traverseRow, "Row index cannot be negative. Indexing starts from 0.", traversalExplanation);
+    return;
+  }
+
+  if (c < 0) {
+    showInvalid(traverseCol, "Column index cannot be negative. Indexing starts from 0.", traversalExplanation);
+    return;
+  }
+
+  // Large index check with reason
+  if (r >= row) {
+    showInvalid(
+      traverseRow,
+      `Invalid row index. Matrix has ${row} rows, so maximum allowed index is ${row - 1}.`,
+      traversalExplanation
+    );
+    return;
+  }
+
+  if (c >= column) {
+    showInvalid(
+      traverseCol,
+      `Invalid column index. Matrix has ${column} columns, so maximum allowed index is ${column - 1}.`,
+      traversalExplanation
+    );
+    return;
+  }
+
+
 
   traversalExplanation.textContent = `Value at [${r}][${c}] is ${matrix[r][c]}.`;
   highlightCell(traversalMatrixContainer, r, c);
@@ -292,10 +411,48 @@ manipulateBtn.addEventListener("click", () => {
   let val = parseInt(newValue.value);
   clearHighlights(manipulationMatrixContainer);
 
-  if (isNaN(r) || isNaN(c) || isNaN(val) || r < 0 || r >= row || c < 0 || c >= column) {
-    manipulationExplanation.textContent = "Invalid input.";
+  // Whole number check
+  if (!Number.isInteger(Number(manipulateRow.value))) {
+    showInvalid(manipulateRow, "Row index must be a whole number.", manipulationExplanation);
     return;
   }
+
+  if (!Number.isInteger(Number(manipulateCol.value))) {
+    showInvalid(manipulateCol, "Column index must be a whole number.", manipulationExplanation);
+    return;
+  }
+
+  // Negative check
+  if (r < 0) {
+    showInvalid(manipulateRow, "Row index cannot be negative. Indexing starts from 0.", manipulationExplanation);
+    return;
+  }
+
+  if (c < 0) {
+    showInvalid(manipulateCol, "Column index cannot be negative. Indexing starts from 0.", manipulationExplanation);
+    return;
+  }
+
+  // Large index check with explanation
+  if (r >= row) {
+    showInvalid(
+      manipulateRow,
+      `Invalid row index. Matrix has ${row} rows, so maximum allowed index is ${row - 1}.`,
+      manipulationExplanation
+    );
+    return;
+  }
+
+  if (c >= column) {
+    showInvalid(
+      manipulateCol,
+      `Invalid column index. Matrix has ${column} columns, so maximum allowed index is ${column - 1}.`,
+      manipulationExplanation
+    );
+    return;
+  }
+
+
 
   matrix[r][c] = val;
   manipulationExplanation.textContent = `Matrix updated at [${r}][${c}].`;
@@ -321,7 +478,7 @@ manipulationResetBtn.addEventListener("click", () => {
   // Redisplay the current matrix without changes
   displayMatrix(matrix, manipulationMatrixContainer);
   manipulateBtn.classList.remove("hidden");
-   manipulationResetBtn.classList.add("hidden");
+  manipulationResetBtn.classList.add("hidden");
 });
 
 // Helpers for traversal/manipulation
@@ -356,3 +513,58 @@ function clearHighlights(container) {
     cell.classList.remove("highlight");
   });
 }
+
+function resetPractice() {
+  // Reset step counter
+  currentStep = 0;
+
+  // Clear matrix data
+  matrix = [];
+  elementList = [];
+  nextIndex = 0;
+  row = null;
+  column = null;
+
+  // Clear all inputs
+  rowInput.value = "";
+  colInput.value = "";
+  elementsInput.style.display = "none";
+  document.getElementById("values").value = "";
+
+  traverseRow.value = "";
+  traverseCol.value = "";
+
+  manipulateRow.value = "";
+  manipulateCol.value = "";
+  newValue.value = "";
+
+  // Clear containers
+  matrixContainer.innerHTML = "";
+  traversalMatrixContainer.innerHTML = "";
+  manipulationMatrixContainer.innerHTML = "";
+
+  // Reset explanations
+  traversalExplanation.textContent = "";
+  manipulationExplanation.textContent = "";
+  stepExplanation.textContent = "";
+
+  // Show only first step
+  creationStep.style.display = "block";
+  traversalStep.style.display = "none";
+  manipulationStep.style.display = "none";
+
+  matrixSteps.style.display = "block";
+
+  // Reset buttons
+  stepNextBtn.style.display = "none";
+  stepNextBtn.textContent = "Step 1 → Creation";
+
+  enterBtn.style.display = "none";
+  resetButton.classList.add("hidden");
+  goToTraversalBtn.classList.add("hidden");
+
+  // Remove highlights
+  clearHighlights(traversalMatrixContainer);
+  clearHighlights(manipulationMatrixContainer);
+}
+
