@@ -3,7 +3,7 @@
 .matrix-container {
   width: 95%;
   max-width: 600px;
-  text-align: center; /* center align all content */
+  text-align: justify; /* center align all content */
   margin: 0 auto 20px auto;
 }
 
@@ -28,6 +28,7 @@ button {
   color: white;
   cursor: pointer;
   font-weight: bold;
+  text-align: center;
 }
 .button-practice {
   text-align: center;
@@ -156,6 +157,12 @@ button:hover {
   margin-bottom: 18px;
   color: #374151;
   line-height: 1.6;
+    text-align: center;
+    margin-top: 15px;
+}
+.explanation {
+    text-align: center;
+    margin-top: 15px;
 }
 #stepNextBtn {
   padding: 10px 20px;
