@@ -252,141 +252,144 @@
             <div class="code-content">
               <pre><code class="language-cpp">// C++ Code Example
               
-                  #include <iostream>
-                  #include <vector>
-                  using namespace std;
-                  
-                  vector<vector<int>> createMatrix(int m, int n) {
-                      vector<vector<int>> matrix(m, vector<int>(n));
-                  
-                      cout << "Enter " << m * n << " elements:\n";
-                      for (int i = 0; i < m; i++) {
-                          for (int j = 0; j < n; j++) {
-                              cin >> matrix[i][j];
-                          }
-                      }
-                      return matrix;
-                  }
-                  
-                  void displayMatrix(const vector<vector<int>>& matrix) {
-                      cout << "\nMatrix:\n";
-                      for (const auto& row : matrix) {
-                          for (int val : row) {
-                              cout << val << " ";
-                          }
-                          cout << endl;
-                      }
-                  }
-                  
-                  void traverseMatrix(const vector<vector<int>>& matrix) {
-                      int r, c;
-                  
-                      cout << "Enter row index: ";
-                      cin >> r;
-                      cout << "Enter column index: ";
-                      cin >> c;
-                  
-                      if (r < 0 || r >= matrix.size() || c < 0 || c >= matrix[0].size()) {
-                          cout << "Invalid index!\n";
-                      } else {
-                          cout << "Value = " << matrix[r][c] << endl;
-                      }
-                  }
-                  
-                  void manipulateMatrix(vector<vector<int>>& matrix) {
-                      int r, c, newValue;
-                  
-                      cout << "Enter row index: ";
-                      cin >> r;
-                      cout << "Enter column index: ";
-                      cin >> c;
-                      cout << "Enter new value: ";
-                      cin >> newValue;
-                  
-                      if (r < 0 || r >= matrix.size() || c < 0 || c >= matrix[0].size()) {
-                          cout << "Invalid index!\n";
-                      } else {
-                          matrix[r][c] = newValue;
-                          cout << "Value updated successfully.\n";
-                      }
-                  }
-                  
-                  vector<vector<int>> transposeMatrix(const vector<vector<int>>& matrix) {
-                      int rows = matrix.size();
-                      int cols = matrix[0].size();
-                  
-                      vector<vector<int>> transpose(cols, vector<int>(rows));
-                  
-                      for (int i = 0; i < rows; i++) {
-                          for (int j = 0; j < cols; j++) {
-                              transpose[j][i] = matrix[i][j];
-                          }
-                      }
-                  
-                      return transpose;
-                  }
-                  
-                  int main() {
-                      int m, n;
-                  
-                      cout << "Enter number of rows: ";
-                      cin >> m;
-                  
-                      cout << "Enter number of columns: ";
-                      cin >> n;
-                  
-                      vector<vector<int>> mat = createMatrix(m, n);
-                  
-                      int choice;
-                  
-                      do {
-                          cout << "\n===== MENU =====\n";
-                          cout << "1. Display Matrix\n";
-                          cout << "2. Traverse Matrix\n";
-                          cout << "3. Manipulate Matrix\n";
-                          cout << "4. Transpose Matrix\n";
-                          cout << "5. Exit\n";
-                          cout << "Enter your choice: ";
-                          cin >> choice;
-                  
-                          switch (choice) {
-                              case 1:
-                                  displayMatrix(mat);
-                                  break;
-                  
-                              case 2:
-                                  traverseMatrix(mat);
-                                  break;
-                  
-                              case 3:
-                                  manipulateMatrix(mat);
-                                  break;
-                  
-                              case 4: {
-                                  vector<vector<int>> transposed = transposeMatrix(mat);
-                  
-                                  cout << "\nTranspose Matrix:\n";
-                                  for (const auto& row : transposed) {
-                                      for (int val : row) {
-                                          cout << val << " ";
-                                      }
-                                      cout << endl;
-                                  }
-                                  break;
-                              }
-                  
-                              case 5:
-                                  cout << "Exiting Program...\n";
-                                  break;
-                  
-                              default:
-                                  cout << "Invalid Choice!\n";
-                          }
-                  
-                      } while (choice != 5);
-                  
-                      return 0;
-                  }
+              
+                #include &lt;iostream&gt;
+                #include &lt;vector&gt;
+                using namespace std;
+                
+                vector&lt;vector&lt;int&gt;&gt; createMatrix(int m, int n) {
+                    vector&lt;vector&lt;int&gt;&gt; matrix(m, vector&lt;int&gt;(n));
+                
+                    cout &lt;&lt; "Enter " &lt;&lt; m * n &lt;&lt; " elements:\n";
+                    for (int i = 0; i &lt; m; i++) {
+                        for (int j = 0; j &lt; n; j++) {
+                            cin &gt;&gt; matrix[i][j];
+                        }
+                    }
+                    return matrix;
+                }
+                
+                void displayMatrix(const vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+                    cout &lt;&lt; "\nMatrix:\n";
+                    for (const auto&amp; row : matrix) {
+                        for (int val : row) {
+                            cout &lt;&lt; val &lt;&lt; " ";
+                        }
+                        cout &lt;&lt; endl;
+                    }
+                }
+                
+                void traverseMatrix(const vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+                    int r, c;
+                
+                    cout &lt;&lt; "Enter row index: ";
+                    cin &gt;&gt; r;
+                    cout &lt;&lt; "Enter column index: ";
+                    cin &gt;&gt; c;
+                
+                    if (r &lt; 0 || r &gt;= matrix.size() || c &lt; 0 || c &gt;= matrix[0].size()) {
+                        cout &lt;&lt; "Invalid index!\n";
+                    } else {
+                        cout &lt;&lt; "Value = " &lt;&lt; matrix[r][c] &lt;&lt; endl;
+                    }
+                }
+                
+                void manipulateMatrix(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+                    int r, c, newValue;
+                
+                    cout &lt;&lt; "Enter row index: ";
+                    cin &gt;&gt; r;
+                    cout &lt;&lt; "Enter column index: ";
+                    cin &gt;&gt; c;
+                    cout &lt;&lt; "Enter new value: ";
+                    cin &gt;&gt; newValue;
+                
+                    if (r &lt; 0 || r &gt;= matrix.size() || c &lt; 0 || c &gt;= matrix[0].size()) {
+                        cout &lt;&lt; "Invalid index!\n";
+                    } else {
+                        matrix[r][c] = newValue;
+                        cout &lt;&lt; "Value updated successfully.\n";
+                    }
+                }
+                
+                vector&lt;vector&lt;int&gt;&gt; transposeMatrix(const vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+                    int rows = matrix.size();
+                    int cols = matrix[0].size();
+                
+                    vector&lt;vector&lt;int&gt;&gt; transpose(cols, vector&lt;int&gt;(rows));
+                
+                    for (int i = 0; i &lt; rows; i++) {
+                        for (int j = 0; j &lt; cols; j++) {
+                            transpose[j][i] = matrix[i][j];
+                        }
+                    }
+                
+                    return transpose;
+                }
+                
+                int main() {
+                    int m, n;
+                
+                    cout &lt;&lt; "Enter number of rows: ";
+                    cin &gt;&gt; m;
+                
+                    cout &lt;&lt; "Enter number of columns: ";
+                    cin &gt;&gt; n;
+                
+                    vector&lt;vector&lt;int&gt;&gt; mat = createMatrix(m, n);
+                
+                    int choice;
+                
+                    do {
+                        cout &lt;&lt; "\n===== MENU =====\n";
+                        cout &lt;&lt; "1. Display Matrix\n";
+                        cout &lt;&lt; "2. Traverse Matrix\n";
+                        cout &lt;&lt; "3. Manipulate Matrix\n";
+                        cout &lt;&lt; "4. Transpose Matrix\n";
+                        cout &lt;&lt; "5. Exit\n";
+                        cout &lt;&lt; "Enter your choice: ";
+                        cin &gt;&gt; choice;
+                
+                        switch (choice) {
+                            case 1:
+                                displayMatrix(mat);
+                                break;
+                
+                            case 2:
+                                traverseMatrix(mat);
+                                break;
+                
+                            case 3:
+                                manipulateMatrix(mat);
+                                break;
+                
+                            case 4: {
+                                vector&lt;vector&lt;int&gt;&gt; transposed = transposeMatrix(mat);
+                
+                                cout &lt;&lt; "\nTranspose Matrix:\n";
+                                for (const auto&amp; row : transposed) {
+                                    for (int val : row) {
+                                        cout &lt;&lt; val &lt;&lt; " ";
+                                    }
+                                    cout &lt;&lt; endl;
+                                }
+                                break;
+                            }
+                
+                            case 5:
+                                cout &lt;&lt; "Exiting Program...\n";
+                                break;
+                
+                            default:
+                                cout &lt;&lt; "Invalid Choice!\n";
+                        }
+                
+                    } while (choice != 5);
+                
+                    return 0;
+                }
+
+
 
 
 
@@ -702,23 +705,19 @@
       <!-- Quiz -->
       <div class="container" id="quiz">
         <div class="title">Quiz</div>
-        <div style="margin-top:20px; padding:15px; border:1px solid #ddd; border-radius:8px;">
+          <div style="margin-bottom:20px; padding:15px; border:1px solid #ddd; border-radius:8px;">
+            <p><strong>Sample Quiz Question</strong></p>
         
-          <p><strong>Sample Quiz Question</strong></p>
+            <p>Which matrix has equal rows and columns?</p>
         
-          <p style="margin-top:15px;">
-            Which matrix has the same number of rows and columns?
-          </p>
+            <p>□ Identity</p>
+            <p>□ Zero</p>
         
-          <div style="margin-top:10px;">
-            <p>A. Identity</p>
-            <p>B. Sparse</p>
-            <p style="background-color:#d4edda; color:#155724; padding:6px; border-radius:4px;">
-              C. Square ✓
+            <p style="background-color:#d4edda; color:#155724; padding:6px; border-radius:4px; display:inline-block;">
+                ☑ Square
             </p>
-            <p>D. Zero</p>
-          </div>
         
+            <p>□ Sparse</p>
         </div>
         <div id="choices" class="choices"></div>
 
