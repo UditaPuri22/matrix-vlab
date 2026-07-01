@@ -211,11 +211,24 @@
             <li>If invalid, print <code>"Invalid index!"</code></li>
           </ul>
 
+          <p><strong>Step 4 – Transpose the Matrix:</strong></p>
+          <ul style="list-style-type:disc">
+            <li>Name the function <code>transpose_matrix(matrix)</code>, where:</li>
+            <ul style="list-style-type:square">
+              <li><code>matrix</code> is the matrix to be transposed</li>
+            </ul>
+            <li>Create a new matrix by swapping rows and columns</li>
+            <li>Move each element from position <code>(i, j)</code> to <code>(j, i)</code></li>
+            <li>Return the transposed matrix</li>
+            <li>Display the transpose matrix to the user</li>
+          </ul>
+
           <p><strong>Final Output:</strong></p>
           <ul style="list-style-type:disc">
             <li>First, display the entire matrix after creation</li>
             <li>Then, traverse and display the value at the specified index</li>
             <li>Next, manipulate the matrix and show the updated matrix</li>
+            <li>Finally, generate and display the transpose of the matrix</li>
           </ul>
 
         </div>
@@ -238,87 +251,144 @@
           <div id="cppCode" class="code-block active">
             <div class="code-content">
               <pre><code class="language-cpp">// C++ Code Example
-                #include &lt;iostream&gt;
-                #include &lt;vector&gt;
-                using namespace std;
-
-                // Step 1: Create the matrix
-                vector&lt;vector&lt;int&gt;&gt; createMatrix(int m, int n) {
-                  vector&lt;vector&lt;int&gt;&gt; matrix(m, vector&lt;int&gt;(n));
-                
-                  cout << "Enter " << m * n << " elements one by one:" << endl;
-                  for (int i = 0; i < m; i++) {
-                    for (int j = 0; j < n; j++) {
-                      cin >> matrix[i][j];
-                    }
-                  }
-    
-                  return matrix;
-                }
-
-                // Step 2: Traverse the matrix by index
-                void traverseMatrix(const vector&lt;vector&lt;int&gt;&gt;& matrix, int r, int c) {
-                  if (r < 0 || r >= matrix.size() || c < 0 || c >= matrix[0].size()) {
-                    cout << "Invalid index!" << endl;
-                  } else {
-                  cout << "Value at index [" << r << "][" << c << "] is " << matrix[r][c] << endl;
-                  }
-                }
-
-                // Step 3: Manipulate the matrix at a given index
-                void manipulateMatrix(vector&lt;vector&lt;int&gt;&gt;& matrix, int r, int c, int newValue) {
-                  if (r < 0 || r >= matrix.size() || c < 0 || c >= matrix[0].size()) {
-                    cout << "Invalid index!" << endl;
-                  } else {
-                  matrix[r][c] = newValue;
-                  cout << "Updated value at index [" << r << "][" << c << "] to " << newValue << endl;
-                  }
-                }
-
-                int main() {
-                  int m, n;
-                  cout << "Enter number of rows: ";
-                  cin >> m;
-                  cout << "Enter number of columns: ";
-                  cin >> n;
-                  vector&lt;vector&lt;int&gt;&gt; mat = createMatrix(m, n);
-
-                  cout << "\nMatrix:" << endl;
-                  for (const auto& row : mat) {
-                    for (int val : row) {
-                      cout << val << " ";
-                    }
-                    cout << endl;
-                  }
-
-                  // Traversal
-                  int r, c;
-                  cout << "\nEnter row index to traverse: ";
-                  cin >> r;
-                  cout << "Enter column index to traverse: ";
-                  cin >> c;
-                  traverseMatrix(mat, r, c);
-
-                  // Manipulation
-                  cout << "\nEnter row index to update: ";
-                  cin >> r;
-                  cout << "Enter column index to update: ";
-                  cin >> c;
-                  int newValue;
-                  cout << "Enter new value: ";
-                  cin >> newValue;
-                  manipulateMatrix(mat, r, c, newValue);
-
-                  cout << "\nUpdated Matrix:" << endl;
-                  for (const auto& row : mat) {
-                    for (int val : row) {
-                      cout << val << " ";
+              
+                  #include <iostream>
+                  #include <vector>
+                  using namespace std;
+                  
+                  vector<vector<int>> createMatrix(int m, int n) {
+                      vector<vector<int>> matrix(m, vector<int>(n));
+                  
+                      cout << "Enter " << m * n << " elements:\n";
+                      for (int i = 0; i < m; i++) {
+                          for (int j = 0; j < n; j++) {
+                              cin >> matrix[i][j];
+                          }
                       }
-                      cout << endl;
-                    }
+                      return matrix;
+                  }
+                  
+                  void displayMatrix(const vector<vector<int>>& matrix) {
+                      cout << "\nMatrix:\n";
+                      for (const auto& row : matrix) {
+                          for (int val : row) {
+                              cout << val << " ";
+                          }
+                          cout << endl;
+                      }
+                  }
+                  
+                  void traverseMatrix(const vector<vector<int>>& matrix) {
+                      int r, c;
+                  
+                      cout << "Enter row index: ";
+                      cin >> r;
+                      cout << "Enter column index: ";
+                      cin >> c;
+                  
+                      if (r < 0 || r >= matrix.size() || c < 0 || c >= matrix[0].size()) {
+                          cout << "Invalid index!\n";
+                      } else {
+                          cout << "Value = " << matrix[r][c] << endl;
+                      }
+                  }
+                  
+                  void manipulateMatrix(vector<vector<int>>& matrix) {
+                      int r, c, newValue;
+                  
+                      cout << "Enter row index: ";
+                      cin >> r;
+                      cout << "Enter column index: ";
+                      cin >> c;
+                      cout << "Enter new value: ";
+                      cin >> newValue;
+                  
+                      if (r < 0 || r >= matrix.size() || c < 0 || c >= matrix[0].size()) {
+                          cout << "Invalid index!\n";
+                      } else {
+                          matrix[r][c] = newValue;
+                          cout << "Value updated successfully.\n";
+                      }
+                  }
+                  
+                  vector<vector<int>> transposeMatrix(const vector<vector<int>>& matrix) {
+                      int rows = matrix.size();
+                      int cols = matrix[0].size();
+                  
+                      vector<vector<int>> transpose(cols, vector<int>(rows));
+                  
+                      for (int i = 0; i < rows; i++) {
+                          for (int j = 0; j < cols; j++) {
+                              transpose[j][i] = matrix[i][j];
+                          }
+                      }
+                  
+                      return transpose;
+                  }
+                  
+                  int main() {
+                      int m, n;
+                  
+                      cout << "Enter number of rows: ";
+                      cin >> m;
+                  
+                      cout << "Enter number of columns: ";
+                      cin >> n;
+                  
+                      vector<vector<int>> mat = createMatrix(m, n);
+                  
+                      int choice;
+                  
+                      do {
+                          cout << "\n===== MENU =====\n";
+                          cout << "1. Display Matrix\n";
+                          cout << "2. Traverse Matrix\n";
+                          cout << "3. Manipulate Matrix\n";
+                          cout << "4. Transpose Matrix\n";
+                          cout << "5. Exit\n";
+                          cout << "Enter your choice: ";
+                          cin >> choice;
+                  
+                          switch (choice) {
+                              case 1:
+                                  displayMatrix(mat);
+                                  break;
+                  
+                              case 2:
+                                  traverseMatrix(mat);
+                                  break;
+                  
+                              case 3:
+                                  manipulateMatrix(mat);
+                                  break;
+                  
+                              case 4: {
+                                  vector<vector<int>> transposed = transposeMatrix(mat);
+                  
+                                  cout << "\nTranspose Matrix:\n";
+                                  for (const auto& row : transposed) {
+                                      for (int val : row) {
+                                          cout << val << " ";
+                                      }
+                                      cout << endl;
+                                  }
+                                  break;
+                              }
+                  
+                              case 5:
+                                  cout << "Exiting Program...\n";
+                                  break;
+                  
+                              default:
+                                  cout << "Invalid Choice!\n";
+                          }
+                  
+                      } while (choice != 5);
+                  
+                      return 0;
+                  }
 
-                  return 0;
-                }
+
 
               </code></pre>
               <button class="copy-button">Copy</button>
@@ -327,59 +397,107 @@
           <div id="pythonCode" class="code-block">
             <div class="code-content">
               <pre><code class="language-python"># Python Code Example
-                # Step 1: Create the matrix
-                def create_matrix(m,n):
-
-                  M = []
-                  for i in range(m):
-                    row = []
-                    for j in range(n):
-                     val = input(f"Element at ({i+1},{j+1}): ")
-                     row.append(val)
-                    M.append(row)
-
-                  return M
-
-                # Step 2: Traverse the matrix by index
-                def traverse_matrix(matrix, r, c):
-                  if r < 0 or r >= len(matrix) or c < 0 or c >= len(matrix[0]):
-                    print("Invalid index!")
-                  else:
-                    print(f"Value at index [{r}][{c}] is {matrix[r][c]}")
-
+                # Step 1: Create Matrix
+                def create_matrix(m, n):
+                    matrix = []
                 
-                # Step 3: Manipulate the matrix at a given index
-                def manipulate_matrix(matrix, r, c, new_value):
-                  if r < 0 or r >= len(matrix) or c < 0 or c >= len(matrix[0]):
-                    print("Invalid index!")
-                  else:
-                    matrix[r][c] = new_value
-                      print(f"Updated value at index [{r}][{c}] to {new_value}")
-
-                # Example usage:
+                    print(f"Enter {m*n} elements:")
+                    for i in range(m):
+                        row = []
+                        for j in range(n):
+                            value = int(input(f"Element [{i}][{j}]: "))
+                            row.append(value)
+                        matrix.append(row)
+                
+                    return matrix
+                
+                
+                # Display Matrix
+                def display_matrix(matrix):
+                    print("\nMatrix:")
+                    for row in matrix:
+                        print(row)
+                
+                
+                # Step 2: Traverse Matrix
+                def traverse_matrix(matrix):
+                    r = int(input("Enter row index: "))
+                    c = int(input("Enter column index: "))
+                
+                    if r < 0 or r >= len(matrix) or c < 0 or c >= len(matrix[0]):
+                        print("Invalid index!")
+                    else:
+                        print("Value =", matrix[r][c])
+                
+                
+                # Step 3: Manipulate Matrix
+                def manipulate_matrix(matrix):
+                    r = int(input("Enter row index: "))
+                    c = int(input("Enter column index: "))
+                    new_value = int(input("Enter new value: "))
+                
+                    if r < 0 or r >= len(matrix) or c < 0 or c >= len(matrix[0]):
+                        print("Invalid index!")
+                    else:
+                        matrix[r][c] = new_value
+                        print("Value updated successfully.")
+                
+                
+                # Step 4: Transpose Matrix
+                def transpose_matrix(matrix):
+                    rows = len(matrix)
+                    cols = len(matrix[0])
+                
+                    transpose = []
+                
+                    for j in range(cols):
+                        row = []
+                        for i in range(rows):
+                            row.append(matrix[i][j])
+                        transpose.append(row)
+                
+                    return transpose
+                
+                
+                # Main Program
                 m = int(input("Enter number of rows: "))
                 n = int(input("Enter number of columns: "))
-          
+                
                 mat = create_matrix(m, n)
+                
+                while True:
+                    print("\n===== MENU =====")
+                    print("1. Display Matrix")
+                    print("2. Traverse Matrix")
+                    print("3. Manipulate Matrix")
+                    print("4. Transpose Matrix")
+                    print("5. Exit")
+                
+                    choice = int(input("Enter your choice: "))
+                
+                    if choice == 1:
+                        display_matrix(mat)
+                
+                    elif choice == 2:
+                        traverse_matrix(mat)
+                
+                    elif choice == 3:
+                        manipulate_matrix(mat)
+                
+                    elif choice == 4:
+                        transposed = transpose_matrix(mat)
+                
+                        print("\nTranspose Matrix:")
+                        for row in transposed:
+                            print(row)
+                
+                    elif choice == 5:
+                        print("Exiting Program...")
+                        break
+                
+                    else:
+                        print("Invalid Choice!")
 
-                print("\nMatrix:")
-                for row in mat:
-                  print(row)
-
-                # Traversal
-                r = int(input("\nEnter row index to traverse: "))
-                c = int(input("Enter column index to traverse: "))
-                traverse_matrix(mat, r, c)
-
-                # Manipulation
-                r = int(input("\nEnter row index to manipulate: "))
-                c = int(input("Enter column index to manipulate: "))
-                new_value = int(input("Enter new value: "))
-                manipulate_matrix(mat, r, c, new_value)
-
-                print("\nUpdated Matrix:")
-                for row in mat:
-                  print(row)
               </code></pre>
               <button class="copy-button">Copy</button>
             </div>
@@ -584,12 +702,24 @@
       <!-- Quiz -->
       <div class="container" id="quiz">
         <div class="title">Quiz</div>
-        <p><b>Sample Quiz Questions:</b></p>
-        <p>1. Matrix with equal rows and columns? <span style="color:green;">Square</span></p>
-        <p>2. Identity matrix diagonal value? <span style="color:green;">1</span></p>
-        <p>3. Rows become columns in? <span style="color:green;">Transpose</span></p>
-        <p>4. Accessing an element is called? <span style="color:green;">Traversal</span></p>
-        <p id="question" class="quiz-question"></p>
+        <div style="margin-top:20px; padding:15px; border:1px solid #ddd; border-radius:8px;">
+        
+          <p><strong>Sample Quiz Question</strong></p>
+        
+          <p style="margin-top:15px;">
+            Which matrix has the same number of rows and columns?
+          </p>
+        
+          <div style="margin-top:10px;">
+            <p>A. Identity</p>
+            <p>B. Sparse</p>
+            <p style="background-color:#d4edda; color:#155724; padding:6px; border-radius:4px;">
+              C. Square ✓
+            </p>
+            <p>D. Zero</p>
+          </div>
+        
+        </div>
         <div id="choices" class="choices"></div>
 
         <div class="quiz-buttons">
